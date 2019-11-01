@@ -74,22 +74,23 @@ $arProduct = $rsProduct->Fetch();
                                 if ($av['AMOUNT']>0) {
 
                                     $arPrice = CPrice::GetList(array(), array(
-                                        'PRODUCT_ID' => $av['PRODUCT_ID']
-                                        //'CATALOG_GROUP_ID' => $av['STORE_ID']
+                                        'PRODUCT_ID' => $av['PRODUCT_ID'],
+                                        'CATALOG_GROUP_ID' => $arTypePriceToStore[$av['STORE_ID']]
                                     ));
-                                    $discount = CCatalogDiscount::GetDiscountByProduct($av['PRODUCT_ID']);
-                                    while($row = $arPrice->Fetch()){
-                                        var_dump($row);
-                                    }
-                                    //var_dump($amount['STORE_ID']);
 
-                                    /*if (!empty($discount)){
-                                        $discount = (int) $arPrice['PRICE'] / (int) ($discount[0]['VALUE']);
+                                    $discount = CCatalogDiscount::GetDiscountByProduct($av['PRODUCT_ID']);
+
+                                    while($row = $arPrice->Fetch()){
+                                        $priceItem = $row;
+                                    }
+
+                                    if (!empty($discount)){
+                                        $discount = (int) $priceItem['PRICE'] / (int) ($discount[0]['VALUE']);
                                     }else{
                                         $discount = 0;
-                                    }*/
+                                    }
                                     $amountCnt = 1;
-                                    ?><li><?=$SKU[$av['PRODUCT_ID']]['CML2_ATTRIBUTES']['VALUE']?> (<?=$av['AMOUNT']?>) <?php //$arPrice['PRICE'] ?> р.</li><?php
+                                    ?><li><?=$SKU[$av['PRODUCT_ID']]['CML2_ATTRIBUTES']['VALUE']?> (<?=$av['AMOUNT']?>) - <?= $priceItem['PRICE'] - $discount;?> р.</li><?php
                                 }
                             }
                             if (!$amountCnt) {

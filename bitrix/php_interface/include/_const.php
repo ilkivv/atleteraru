@@ -1,7 +1,7 @@
 <?php
 
-/*$arTypePriceToStore = array(
-    3 =>
-    4 =>
-    1 =>
-);*/
+$arTypePriceToStore = array(
+    3 => 8,
+    4 => 10,
+    1 => 9
+);
