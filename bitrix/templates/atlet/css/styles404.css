@@ -1,0 +1,52 @@
+@font-face{
+	font-family: 'Clear Sans', arial;
+	src: url('../fonts/ClearSans-Regular.ttf') format('truetype');
+	font-style: normal;
+}
+@font-face{
+	font-family: 'Clear Sans', arial;
+	src: url('../fonts/ClearSans-Italic.ttf') format('truetype');
+	font-style: italic;
+}
+.wrap{
+	text-align: center;
+	margin-top: 5%;
+}
+.textwrap{
+	text-align: center;
+	margin-top: 57px;
+}
+.text404{
+	font-family: 'Clear Sans', arial;
+	font-size: 15px;
+	color: #30353a;
+}
+.text404:last-of-type {
+	margin-top: 15px;
+	margin-bottom: 40px;
+
+}
+.button404{
+	color: #30353a;
+	font-family: 'Clear Sans', arial;
+	text-decoration: none;
+	font-size: 15px;
+
+}
+
+.button404-wrap{
+	transform: skewX(-12deg);
+    border: 1px solid #ff1515;
+    border-radius: 7px;
+    width: 200px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin: 0 auto;
+}
+.link-wrap{
+	text-decoration: none !important;
+}
+
+.texterap a{
+	text-decoration: none;
+}
