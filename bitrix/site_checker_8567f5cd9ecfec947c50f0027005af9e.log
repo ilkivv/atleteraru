@@ -1,0 +1,210 @@
+2014-Aug-19 17:01:24 Наличие необходимых модулей php (check_php_modules): Ok
+Все необходимые модули установлены
+2014-Aug-19 17:01:24 Обязательные параметры PHP (check_php_settings): Ok
+Настройки правильные
+2014-Aug-19 17:01:25 Модули веб-сервера (check_security): Ok
+Конфликтов не выявлено
+2014-Aug-19 17:01:25 Значения переменных сервера (check_server_vars): Ok
+Корректные
+2014-Aug-19 17:01:26 Сохранение сессии (check_session): Ok
+50% done
+2014-Aug-19 17:01:26 Сохранение сессии (check_session): Ok
+Успешно
+2014-Aug-19 17:01:26 Параметры настройки UTF (mbstring и константа BX_UTF) (check_mbstring): Ok
+Правильные. Сайт работает в UTF кодировке
+2014-Aug-19 17:01:27 Работа с сокетами (check_socket): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:01:27 Лишний вывод в файлах конфигурации (check_dbconn): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:01:28 Выполнение агентов на cron (check_bx_crontab): Warning
+Замечание. Агенты выполняются на хитах, рекомендуется перевести выполнение агентов на cron
+2014-Aug-19 17:01:28 Сохранение сессии без UserAgent (check_session_ua): Ok
+50% done
+Connection to dev2.redramka.ru:80	Success
+
+2014-Aug-19 17:01:29 Сохранение сессии без UserAgent (check_session_ua): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:01:29 Настройки сайтов (check_sites): Ok
+Правильные
+2014-Aug-19 17:01:29 Служебные скрипты в корне сайта (check_install_scripts): Ok
+Отсутствуют
+2014-Aug-19 17:01:30 Передача объектов по ссылке (check_clone): Ok
+Успешно
+2014-Aug-19 17:02:24 Размер стека и pcre.recursion_limit (check_pcre_recursion): Fail
+Connection to dev2.redramka.ru:80	Success
+
+Ошибка! Не работает
+2014-Aug-19 17:02:24 Вызов method_exists на строке (check_method_exists): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:25 Загрузка файла (check_upload): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:26 Загрузка файла больше 4Мб (check_upload_big): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:26 Загрузка файла через php://input (check_upload_raw): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:26 Передача POST запроса с большим числом параметров (check_post): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:28 Отправка почты (check_mail): Ok
+Успешно
+2014-Aug-19 17:02:29 Отправка почтового сообщения больше 64Кб (check_mail_big): Ok
+Успешно
+2014-Aug-19 17:02:29 Проверка на наличие неотправленных сообщений (check_mail_b_event): Ok
+Успешно
+2014-Aug-19 17:02:30 Внутреннее перенаправление (функция LocalRedirect) (check_localredirect): Ok
+50% done
+Connection to dev2.redramka.ru:80	Success
+
+2014-Aug-19 17:02:30 Внутреннее перенаправление (функция LocalRedirect) (check_localredirect): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:31 Фактическое ограничение памяти (check_memory_limit): Ok
+20% done
+Connection to dev2.redramka.ru:80	Success
+
+2014-Aug-19 17:02:31 Фактическое ограничение памяти (check_memory_limit): Ok
+40% done
+Connection to dev2.redramka.ru:80	Success
+
+2014-Aug-19 17:02:32 Фактическое ограничение памяти (check_memory_limit): Ok
+60% done
+Connection to dev2.redramka.ru:80	Success
+
+2014-Aug-19 17:02:32 Фактическое ограничение памяти (check_memory_limit): Ok
+80% done
+Connection to dev2.redramka.ru:80	Success
+
+2014-Aug-19 17:02:33 Фактическое ограничение памяти (check_memory_limit): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Не менее 256 М
+2014-Aug-19 17:02:33 Работа с файлами кеша (check_cache): Fail
+Ошибка! Не работает
+2014-Aug-19 17:02:34 Доступ к серверу обновлений (check_update): Ok
+Успешно
+2014-Aug-19 17:02:34 HTTP авторизация (check_http_auth): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:35 Создание и запуск файла (check_exec): Ok
+Connection to dev2.redramka.ru:80	Success
+
+Успешно
+2014-Aug-19 17:02:35 Функция getimagesize для swf (check_getimagesize): Ok
+Успешно
+2014-Aug-19 17:02:35 Версия MySQL сервера (check_mysql_bug_version): Ok
+Успешно
+2014-Aug-19 17:02:37 Время на БД и веб сервере (check_mysql_time): Ok
+Успешно
+2014-Aug-19 17:02:37 Режим работы MySQL (check_mysql_mode): Ok
+Успешно
+2014-Aug-19 17:02:37 Кодировка соединения (check_mysql_connection_charset): Ok
+character_set_connection=utf8, collation_connection=utf8_unicode_ci, character_set_results=utf8
+Успешно
+2014-Aug-19 17:02:38 Кодировка базы данных (check_mysql_db_charset): Ok
+CHARSET=utf8, COLLATION=utf8_unicode_ci
+Успешно
+2014-Aug-19 17:02:39 Кодировки таблиц в БД (check_mysql_table_charset): Ok
+Успешно
+2014-Aug-19 17:02:41 Структура базы данных (check_mysql_table_structure): Ok
+0% done
+2014-Aug-19 17:02:48 Структура базы данных (check_mysql_table_structure): Ok
+2% done
+2014-Aug-19 17:02:49 Структура базы данных (check_mysql_table_structure): Ok
+4% done
+2014-Aug-19 17:02:50 Структура базы данных (check_mysql_table_structure): Ok
+7% done
+2014-Aug-19 17:02:52 Структура базы данных (check_mysql_table_structure): Ok
+9% done
+2014-Aug-19 17:02:52 Структура базы данных (check_mysql_table_structure): Ok
+11% done
+2014-Aug-19 17:02:55 Структура базы данных (check_mysql_table_structure): Ok
+14% done
+2014-Aug-19 17:02:56 Структура базы данных (check_mysql_table_structure): Ok
+16% done
+2014-Aug-19 17:03:00 Структура базы данных (check_mysql_table_structure): Ok
+19% done
+2014-Aug-19 17:03:00 Структура базы данных (check_mysql_table_structure): Ok
+21% done
+2014-Aug-19 17:03:01 Структура базы данных (check_mysql_table_structure): Ok
+23% done
+2014-Aug-19 17:03:04 Структура базы данных (check_mysql_table_structure): Ok
+26% done
+2014-Aug-19 17:03:14 Структура базы данных (check_mysql_table_structure): Ok
+28% done
+2014-Aug-19 17:03:14 Структура базы данных (check_mysql_table_structure): Ok
+30% done
+2014-Aug-19 17:03:32 Структура базы данных (check_mysql_table_structure): Ok
+33% done
+2014-Aug-19 17:03:34 Структура базы данных (check_mysql_table_structure): Ok
+35% done
+2014-Aug-19 17:03:35 Структура базы данных (check_mysql_table_structure): Ok
+38% done
+2014-Aug-19 17:03:35 Структура базы данных (check_mysql_table_structure): Ok
+40% done
+2014-Aug-19 17:03:36 Структура базы данных (check_mysql_table_structure): Ok
+42% done
+2014-Aug-19 17:03:39 Структура базы данных (check_mysql_table_structure): Ok
+45% done
+2014-Aug-19 17:03:42 Структура базы данных (check_mysql_table_structure): Ok
+47% done
+2014-Aug-19 17:03:44 Структура базы данных (check_mysql_table_structure): Ok
+50% done
+2014-Aug-19 17:03:50 Структура базы данных (check_mysql_table_structure): Ok
+52% done
+2014-Aug-19 17:03:52 Структура базы данных (check_mysql_table_structure): Ok
+54% done
+2014-Aug-19 17:03:53 Структура базы данных (check_mysql_table_structure): Ok
+57% done
+2014-Aug-19 17:03:53 Структура базы данных (check_mysql_table_structure): Ok
+59% done
+2014-Aug-19 17:03:53 Структура базы данных (check_mysql_table_structure): Ok
+61% done
+2014-Aug-19 17:03:56 Структура базы данных (check_mysql_table_structure): Ok
+64% done
+2014-Aug-19 17:03:59 Структура базы данных (check_mysql_table_structure): Ok
+66% done
+2014-Aug-19 17:03:59 Структура базы данных (check_mysql_table_structure): Ok
+69% done
+2014-Aug-19 17:04:07 Структура базы данных (check_mysql_table_structure): Ok
+71% done
+2014-Aug-19 17:04:07 Структура базы данных (check_mysql_table_structure): Ok
+73% done
+2014-Aug-19 17:04:18 Структура базы данных (check_mysql_table_structure): Ok
+76% done
+2014-Aug-19 17:04:26 Структура базы данных (check_mysql_table_structure): Ok
+78% done
+2014-Aug-19 17:04:28 Структура базы данных (check_mysql_table_structure): Ok
+80% done
+2014-Aug-19 17:04:34 Структура базы данных (check_mysql_table_structure): Ok
+83% done
+2014-Aug-19 17:04:40 Структура базы данных (check_mysql_table_structure): Ok
+85% done
+2014-Aug-19 17:04:44 Структура базы данных (check_mysql_table_structure): Ok
+88% done
+2014-Aug-19 17:04:46 Структура базы данных (check_mysql_table_structure): Ok
+90% done
+2014-Aug-19 17:04:47 Структура базы данных (check_mysql_table_structure): Ok
+92% done
+2014-Aug-19 17:05:04 Структура базы данных (check_mysql_table_structure): Ok
+95% done
+2014-Aug-19 17:05:07 Структура базы данных (check_mysql_table_structure): Ok
+97% done
+2014-Aug-19 17:05:07 Структура базы данных (check_mysql_table_structure): Ok
+Успешно

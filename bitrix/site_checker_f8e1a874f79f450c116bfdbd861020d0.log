@@ -1,0 +1,233 @@
+2019-Jun-03 11:50:32 Наличие необходимых модулей php (check_php_modules): Ok
+Все необходимые модули установлены
+2019-Jun-03 11:50:32 Обязательные параметры PHP (check_php_settings): Ok
+Настройки правильные
+2019-Jun-03 11:50:32 Модули веб-сервера (check_security): Ok
+Конфликтов не выявлено
+2019-Jun-03 11:50:33 Значения переменных сервера (check_server_vars): Ok
+Корректные
+2019-Jun-03 11:50:33 Сохранение сессии (check_session): Ok
+50% done
+2019-Jun-03 11:50:33 Сохранение сессии (check_session): Ok
+Успешно
+2019-Jun-03 11:50:33 Параметры настройки UTF (mbstring и константа BX_UTF) (check_mbstring): Ok
+Правильные. Сайт работает в UTF кодировке
+2019-Jun-03 11:50:34 Работа с сокетами (check_socket): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:34 Лишний вывод в файлах конфигурации (check_dbconn): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:34 Выполнение агентов на cron (check_bx_crontab): Warning
+Замечание. Агенты выполняются на хитах, рекомендуется перевести выполнение агентов на cron
+2019-Jun-03 11:50:35 Сохранение сессии без UserAgent (check_session_ua): Ok
+50% done
+Connection to ssl://atletera.ru:443	Success
+
+2019-Jun-03 11:50:35 Сохранение сессии без UserAgent (check_session_ua): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:35 Настройки сайтов (check_sites): Ok
+Правильные
+2019-Jun-03 11:50:36 Служебные скрипты в корне сайта (check_install_scripts): Ok
+Отсутствуют
+2019-Jun-03 11:50:36 Передача объектов по ссылке (check_clone): Ok
+Успешно
+2019-Jun-03 11:50:37 Размер стека и pcre.recursion_limit (check_pcre_recursion): Warning
+Connection to ssl://atletera.ru:443	Success
+
+Замечание. Возможны проблемы в работе с длинными строками из-за системных ограничений
+2019-Jun-03 11:50:37 Вызов method_exists на строке (check_method_exists): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:38 Загрузка файла (check_upload): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:38 Загрузка файла больше 4Мб (check_upload_big): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:38 Загрузка файла через php://input (check_upload_raw): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:38 Передача POST запроса с большим числом параметров (check_post): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:39 Отправка почты (check_mail): Ok
+Успешно
+2019-Jun-03 11:50:41 Отправка почтового сообщения больше 64Кб (check_mail_big): Fail
+Ошибка! Отправлено. Время отправки: 2.29 сек.
+2019-Jun-03 11:50:42 Проверка на наличие неотправленных сообщений (check_mail_b_event): Ok
+Успешно
+2019-Jun-03 11:50:42 Внутреннее перенаправление (функция LocalRedirect) (check_localredirect): Ok
+50% done
+Connection to ssl://atletera.ru:443	Success
+
+2019-Jun-03 11:50:43 Внутреннее перенаправление (функция LocalRedirect) (check_localredirect): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:43 Фактическое ограничение памяти (check_memory_limit): Ok
+20% done
+Connection to ssl://atletera.ru:443	Success
+
+2019-Jun-03 11:50:43 Фактическое ограничение памяти (check_memory_limit): Ok
+40% done
+Connection to ssl://atletera.ru:443	Success
+
+2019-Jun-03 11:50:44 Фактическое ограничение памяти (check_memory_limit): Ok
+60% done
+Connection to ssl://atletera.ru:443	Success
+
+2019-Jun-03 11:50:44 Фактическое ограничение памяти (check_memory_limit): Ok
+80% done
+Connection to ssl://atletera.ru:443	Success
+
+2019-Jun-03 11:50:44 Фактическое ограничение памяти (check_memory_limit): Ok
+Connection to ssl://atletera.ru:443	Success
+== Request ==
+GET /bitrix/admin/site_checker.php?test_type=memory_test&unique_id=065142a3f1c91347556c84eaf27016d3&max=255 HTTP/1.1
+Host: atletera.ru
+
+
+== Response ==
+HTTP/1.1 200 OK
+Date: Mon, 03 Jun 2019 08:50:44 GMT
+Server: Apache/2.2.15 (Red Hat) mod_rpaf/0.6 PHP/5.4.30
+X-Powered-By: PHP/5.4.30
+Cache-Control: max-age=604800
+Expires: Mon, 10 Jun 2019 08:50:44 GMT
+Vary: Accept-Encoding
+Content-Length: 177
+Content-Type: text/html; charset=UTF-8
+
+== Body ==
+
+Fatal error: Allowed memory size of 268435456 bytes exhausted (tried to allocate 1048577 bytes) in /home/srv56620/htdocs/bitrix/modules/main/admin/site_checker.php on line 131
+
+==========
+
+Не менее 128 М
+2019-Jun-03 11:50:45 Работа с файлами кеша (check_cache): Ok
+Успешно
+2019-Jun-03 11:50:45 Доступ к серверу обновлений (check_update): Ok
+Успешно
+2019-Jun-03 11:50:45 HTTP авторизация (check_http_auth): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:46 Создание и запуск файла (check_exec): Ok
+Connection to ssl://atletera.ru:443	Success
+
+Успешно
+2019-Jun-03 11:50:46 Функция getimagesize для swf (check_getimagesize): Ok
+Успешно
+2019-Jun-03 11:50:46 Версия MySQL сервера (check_mysql_bug_version): Ok
+Успешно
+2019-Jun-03 11:50:48 Время на БД и веб сервере (check_mysql_time): Fail
+Ошибка! Время отличается на 3600 секунд
+2019-Jun-03 11:50:48 Режим работы MySQL (check_mysql_mode): Ok
+Успешно
+2019-Jun-03 11:50:48 Кодировка соединения (check_mysql_connection_charset): Ok
+character_set_connection=utf8, collation_connection=utf8_unicode_ci, character_set_results=utf8
+Успешно
+2019-Jun-03 11:50:48 Кодировка базы данных (check_mysql_db_charset): Ok
+CHARSET=utf8, COLLATION=utf8_unicode_ci
+Успешно
+2019-Jun-03 11:50:49 Кодировки таблиц в БД (check_mysql_table_charset): Ok
+Успешно
+2019-Jun-03 11:50:50 Структура базы данных (check_mysql_table_structure): Ok
+0% done
+2019-Jun-03 11:50:50 Структура базы данных (check_mysql_table_structure): Ok
+2% done
+2019-Jun-03 11:50:50 Структура базы данных (check_mysql_table_structure): Ok
+4% done
+2019-Jun-03 11:50:51 Структура базы данных (check_mysql_table_structure): Ok
+6% done
+2019-Jun-03 11:50:52 Структура базы данных (check_mysql_table_structure): Ok
+9% done
+2019-Jun-03 11:50:52 Структура базы данных (check_mysql_table_structure): Ok
+11% done
+2019-Jun-03 11:50:53 Структура базы данных (check_mysql_table_structure): Ok
+13% done
+2019-Jun-03 11:50:53 Структура базы данных (check_mysql_table_structure): Ok
+16% done
+2019-Jun-03 11:50:54 Структура базы данных (check_mysql_table_structure): Ok
+18% done
+2019-Jun-03 11:50:54 Структура базы данных (check_mysql_table_structure): Ok
+20% done
+2019-Jun-03 11:50:54 Структура базы данных (check_mysql_table_structure): Ok
+23% done
+2019-Jun-03 11:50:55 Структура базы данных (check_mysql_table_structure): Ok
+25% done
+2019-Jun-03 11:50:55 Структура базы данных (check_mysql_table_structure): Ok
+27% done
+2019-Jun-03 11:50:56 Структура базы данных (check_mysql_table_structure): Ok
+30% done
+2019-Jun-03 11:50:56 Структура базы данных (check_mysql_table_structure): Ok
+32% done
+2019-Jun-03 11:50:56 Структура базы данных (check_mysql_table_structure): Ok
+34% done
+2019-Jun-03 11:50:57 Структура базы данных (check_mysql_table_structure): Ok
+37% done
+2019-Jun-03 11:50:57 Структура базы данных (check_mysql_table_structure): Ok
+39% done
+2019-Jun-03 11:50:57 Структура базы данных (check_mysql_table_structure): Ok
+41% done
+2019-Jun-03 11:50:58 Структура базы данных (check_mysql_table_structure): Ok
+44% done
+2019-Jun-03 11:50:59 Структура базы данных (check_mysql_table_structure): Ok
+46% done
+2019-Jun-03 11:51:00 Структура базы данных (check_mysql_table_structure): Ok
+48% done
+2019-Jun-03 11:51:00 Структура базы данных (check_mysql_table_structure): Ok
+51% done
+2019-Jun-03 11:51:01 Структура базы данных (check_mysql_table_structure): Ok
+53% done
+2019-Jun-03 11:51:01 Структура базы данных (check_mysql_table_structure): Ok
+55% done
+2019-Jun-03 11:51:02 Структура базы данных (check_mysql_table_structure): Ok
+58% done
+2019-Jun-03 11:51:02 Структура базы данных (check_mysql_table_structure): Ok
+60% done
+2019-Jun-03 11:51:02 Структура базы данных (check_mysql_table_structure): Ok
+62% done
+2019-Jun-03 11:51:03 Структура базы данных (check_mysql_table_structure): Ok
+65% done
+2019-Jun-03 11:51:03 Структура базы данных (check_mysql_table_structure): Ok
+67% done
+2019-Jun-03 11:51:03 Структура базы данных (check_mysql_table_structure): Ok
+69% done
+2019-Jun-03 11:51:03 Структура базы данных (check_mysql_table_structure): Ok
+72% done
+2019-Jun-03 11:51:04 Структура базы данных (check_mysql_table_structure): Ok
+74% done
+2019-Jun-03 11:51:04 Структура базы данных (check_mysql_table_structure): Ok
+76% done
+2019-Jun-03 11:51:05 Структура базы данных (check_mysql_table_structure): Ok
+79% done
+2019-Jun-03 11:51:05 Структура базы данных (check_mysql_table_structure): Ok
+81% done
+2019-Jun-03 11:51:06 Структура базы данных (check_mysql_table_structure): Ok
+83% done
+2019-Jun-03 11:51:06 Структура базы данных (check_mysql_table_structure): Ok
+86% done
+2019-Jun-03 11:51:06 Структура базы данных (check_mysql_table_structure): Ok
+88% done
+2019-Jun-03 11:51:06 Структура базы данных (check_mysql_table_structure): Ok
+90% done
+2019-Jun-03 11:51:07 Структура базы данных (check_mysql_table_structure): Ok
+93% done
+2019-Jun-03 11:51:07 Структура базы данных (check_mysql_table_structure): Ok
+95% done
+2019-Jun-03 11:51:08 Структура базы данных (check_mysql_table_structure): Ok
+97% done
+2019-Jun-03 11:51:08 Структура базы данных (check_mysql_table_structure): Ok
+Успешно

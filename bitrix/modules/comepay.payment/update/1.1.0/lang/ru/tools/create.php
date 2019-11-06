@@ -1,0 +1,12 @@
+<?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+global $MESS;
+$MESS['COMEPAY.PAYMENT_ERROR5'] = "Ошибка при создании счёта: Неверные параметры<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR13'] = "Ошибка при создании счёта: Сервер занят, попробуйте произвести оплату через несколько минут<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR150'] = "Ошибка при создании счёта: Ошибка авторизации<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR150'] = "Ошибка при создании счёта: Запрос не найден<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR215'] = "Ошибка при проведении оплаты. Запрос уже существует<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR241'] = "Ошибка при проведении оплаты. Сумма меньше минимума<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR242'] = "Ошибка при проведении оплаты. Сумма больше максимума<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR298'] = "Вы не зарегистрированны в <a href='http://www.comepay.ru'>Comepay</a><br>Чтобы оплатить счёт, пожалуйста зарегистрируйтесь <a href='https://money.comepay.ru'>https://money.comepay.ru</a><br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR300'] = "Ошибка при создании счёта: Ошибка сервера, попробуйте произвести оплату через несколько минут<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";
+$MESS['COMEPAY.PAYMENT_ERROR99999'] = "Ошибка при создании счёта: Ошибка досутпа, проверьте настройки способа оплаты<br><a href='/' onclick='window.history.go(-1); return false;'>&lt;&lt;Назад</a>";

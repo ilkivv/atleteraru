@@ -1,0 +1,73 @@
+CDBResult Object
+(
+    [result] => Resource id #140
+    [arResult] => 
+    [arReplacedAliases] => 
+    [arResultAdd] => 
+    [bNavStart] => 
+    [bShowAll] => 
+    [NavNum] => 
+    [NavPageCount] => 
+    [NavPageNomer] => 
+    [NavPageSize] => 
+    [NavShowAll] => 
+    [NavRecordCount] => 
+    [bFirstPrintNav] => 1
+    [PAGEN] => 
+    [SIZEN] => 
+    [SESS_SIZEN] => 
+    [SESS_ALL] => 
+    [SESS_PAGEN] => 
+    [add_anchor] => 
+    [bPostNavigation] => 
+    [bFromArray] => 
+    [bFromLimited] => 
+    [sSessInitAdd] => 
+    [nPageWindow] => 5
+    [nSelectedCount] => 
+    [arGetNextCache] => 
+    [bDescPageNumbering] => 
+    [arUserFields] => 
+    [SqlTraceIndex] => 
+    [DB] => CDatabase Object
+        (
+            [version] => 
+            [escL] => `
+            [escR] => `
+            [alias_length] => 256
+            [DBName] => redramka_dev2
+            [DBHost] => localhost
+            [DBLogin] => redramka_dev
+            [DBPassword] => dev
+            [bConnected] => 1
+            [db_Conn] => Resource id #49
+            [debug] => 
+            [DebugToFile] => 
+            [ShowSqlStat] => 
+            [db_Error] => 
+            [db_ErrorSQL] => 
+            [result] => 
+            [type] => MYSQL
+            [column_cache] => Array
+                (
+                )
+
+            [bModuleConnection] => 
+            [bNodeConnection] => 
+            [node_id] => 
+            [bMasterOnly] => 0
+            [obSlave] => 
+            [cntQuery] => 0
+            [timeQuery] => 0
+            [arQueryDebug] => Array
+                (
+                )
+
+        )
+
+    [NavRecordCountChangeDisable] => 
+    [is_filtered] => 
+    [nStartPage] => 0
+    [nEndPage] => 0
+    [resultObject] => 
+)
