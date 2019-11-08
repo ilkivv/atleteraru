@@ -46,6 +46,33 @@ if($sectionIds){
 }
 
 ?>
+    <?php
+    global $APPLICATION;
+    var_dump($APPLICATION->get_cookie("GOROD"));
+    global $_SERVER;
+    $ip = '5.77.5.203';
+    global $APPLICATION;
+    //if($APPLICATION['GOROD'] !== null) {
+        $ip_data = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?lang=ru&ip=" . $ip));
+        if ($ip_data && $ip_data->geoplugin_countryName != null) {
+            $city = $ip_data->geoplugin_city;
+            $APPLICATION->set_cookie("GOROD", $city, 60*60*24);
+            print_r($city);
+        }
+    //}
+
+    $gorod = CSaleLocation::GetList(
+      array(),
+      array(
+          'CITY_LID' => 'ru',
+          'CITY_NAME' => $city
+      ),
+      false,
+      false,
+      array());
+        //if ($gorod[''])
+        var_dump($gorod->Fetch());
+    ?>
 
 <? echo $arResult["NAV_STRING"]; ?>
 <div class="catalog-products-list">
@@ -243,6 +270,13 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
     <script type="text/javascript">
     var <? echo $strObName; ?> = <? echo CUtil::PhpToJSObject($arItem['JS_OFFERS'], false, true); ?>;
     </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                    $location = ymaps.geolocation.get({provider: 'yandex'}).then(function (result) {
+                        console.log(result);
+                });
+            });
+        </script>
      <?php }?>
     </div></div><?
     }

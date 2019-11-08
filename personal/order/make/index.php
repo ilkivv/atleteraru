@@ -2,6 +2,19 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Оформление заказа");
 ?><br>
+<?php
+if (CModule::includeModule('sale')) {
+    $deliveries = CSaleDelivery::GetList(
+        array("SORT" => "ASC"),
+        array('ACTIVE' => 'Y')
+    );
+}
+$arStories = array();
+while($row = $deliveries->Fetch()){
+    var_dump($row['STORE']);
+
+}
+?>
 <?$APPLICATION->IncludeComponent(
 	"custom:sale.order.full",
 	"",
