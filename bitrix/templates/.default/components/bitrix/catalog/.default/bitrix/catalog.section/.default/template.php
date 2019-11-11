@@ -48,7 +48,7 @@ if($sectionIds){
 ?>
     <?php
     global $APPLICATION;
-    var_dump($APPLICATION->get_cookie("GOROD"));
+    //var_dump($APPLICATION->get_cookie("GOROD"));
     global $_SERVER;
     $ip = '5.77.5.203';
     global $APPLICATION;
@@ -57,7 +57,7 @@ if($sectionIds){
         if ($ip_data && $ip_data->geoplugin_countryName != null) {
             $city = $ip_data->geoplugin_city;
             $APPLICATION->set_cookie("GOROD", $city, 60*60*24);
-            print_r($city);
+            //print_r($city);
         }
     //}
 
@@ -71,7 +71,7 @@ if($sectionIds){
       false,
       array());
         //if ($gorod[''])
-        var_dump($gorod->Fetch());
+        //var_dump($gorod->Fetch());
     ?>
 
 <? echo $arResult["NAV_STRING"]; ?>
@@ -138,6 +138,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
 	
 	?>
 	<div class="product-item">
+
 	    <div class="j-catalog-item js-product-container catalog-item"  id="<? echo $strMainID; ?>" rel="<?=$arItem['ID']?>" 
 			data-value="<?=$arItem['IBLOCK_SECTION_ID'];?>" 
 			data-id="<?=$arItem['ID']?>" 
@@ -211,10 +212,12 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                     <div class="choose-taste-list-container">
                         <div class="choose-taste-list j-choose-taste-list">
                         <?php 
-            				foreach ($arItem['OFFERS_BUY_PROPS'] as $code => $property)
-            				{
-            				    ?><div class="item" data-value="<?=$property['SKU_ID']?>"><?=$property['VALUE']?><?php /*?> (<?php if ($property['AMOUNT'] >10){echo ">10";}else{echo $property['AMOUNT']*1;}?>)<?*/?></div><?php 
-            				}
+            				foreach ($arItem['OFFERS_BUY_PROPS'] as $code => $property) {
+
+                                    ?>
+                                    <div class="item"
+                                         data-value="<?= $property['SKU_ID'] ?>"><?= $property['VALUE'] ?><?php /*?> (<?php if ($property['AMOUNT'] >10){echo ">10";}else{echo $property['AMOUNT']*1;}?>)<?*/ ?></div><?php
+                            }
                         ?>
                         </div>
                     </div>
@@ -224,6 +227,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
 			}
 		} 
 	}?>
+
         <div class="catalog-item-price"<?php if (empty($arItem['MIN_PRICE'])){echo "style='height:70px;'";}?>>
                   <div id="<? echo $arItemIDs['PRICE']; ?>">
                     <?

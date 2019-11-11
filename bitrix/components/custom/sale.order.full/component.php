@@ -938,6 +938,15 @@ else
 			{
 				$totalOrderPrice = $arResult["ORDER_PRICE"] + $arResult["DELIVERY_PRICE"] + $arResult["TAX_PRICE"] - $arResult["DISCOUNT_PRICE"];
 
+				$deliveryId = is_array($arResult["DELIVERY_ID"]) ? implode(":", $arResult["DELIVERY_ID"]) : ($arResult["DELIVERY_ID"] > 0 ? $arResult["DELIVERY_ID"] : false);
+				if ($deliveryId){
+				    $saleDelivery = CSaleDelivery::GetByID($deliveryId);
+				    $storeId = explode("\"", $saleDelivery['STORE']);
+				    $storeId = is_int((int) $storeId[1]) ? $storeId[1]: null;
+                    //var_dump($storeId);die();
+				}
+				$storeId =
+
 				$arFields = array(
 					"LID" => SITE_ID,
 					"PERSON_TYPE_ID" => $arResult["PERSON_TYPE"],
@@ -950,6 +959,7 @@ else
 					"PAY_SYSTEM_ID" => $arResult["PAY_SYSTEM_ID"],
 					"PRICE_DELIVERY" => $arResult["DELIVERY_PRICE"],
 					"DELIVERY_ID" => is_array($arResult["DELIVERY_ID"]) ? implode(":", $arResult["DELIVERY_ID"]) : ($arResult["DELIVERY_ID"] > 0 ? $arResult["DELIVERY_ID"] : false),
+					"STORE_ID" => $storeId,
 					"DISCOUNT_VALUE" => $arResult["DISCOUNT_PRICE"],
 					"TAX_VALUE" => $arResult["bUsingVat"] == "Y" ? $arResult["vatSum"] : $arResult["TAX_PRICE"],
 					"USER_DESCRIPTION" => $arResult["ORDER_DESCRIPTION"]
@@ -983,6 +993,8 @@ else
 				else
 				{
 					$arOrder = CSaleOrder::GetByID($arResult["ORDER_ID"]);
+
+
 				}
 			}
 
@@ -990,6 +1002,9 @@ else
 			{
 				CSaleBasket::OrderBasket($arResult["ORDER_ID"], CSaleBasket::GetBasketUserID(), SITE_ID, false);
 
+
+				$order = CSaleOrder::getByID($arResult["ORDER_ID"]);
+                var_dump($order);
 				$dbBasketItems = CSaleBasket::GetList(
 					array("ID" => "ASC"),
 					array(
@@ -1005,10 +1020,26 @@ else
 				while ($arBasketItems = $dbBasketItems->GetNext())
 				{
 					$arResult["ORDER_PRICE"] += DoubleVal($arBasketItems["PRICE"]) * DoubleVal($arBasketItems["QUANTITY"]);
-				}
+                    var_dump($arBasketItems);
+                    var_dump($arBasketItems['STORE_ID']);
+					$storeProduct = CCatalogStoreProduct::GetList(array(), array(
+                        'PRODUCT_ID' => $arBasketItems['PRODUCT_ID'],
+                        'STORE_ID' => (int) $order['STORE_ID'],
+                    ));
+					$storeProduct = $storeProduct->Fetch();
+					var_dump($storeProduct);
+					var_dump($arBasketItems['QUANTITY']);
+					if ($storeProduct['AMOUNT'] >= $arBasketItems['QUANTITY']){
+                        $result = CCatalogStoreProduct::Update($storeProduct['ID'], array(
+                            'AMOUNT' => $storeProduct['AMOUNT'] - $arBasketItems['QUANTITY'],
+                        ));
+                    }
 
+                    die($result);
+				}
 				$totalOrderPrice = $arResult["ORDER_PRICE"] + $arResult["DELIVERY_PRICE"] + $arResult["TAX_PRICE"] - $arResult["DISCOUNT_PRICE"];
 				CSaleOrder::Update($arResult["ORDER_ID"], Array("PRICE" => $totalOrderPrice));
+
 			}
 
 			if (strlen($arResult["ERROR_MESSAGE"]) <= 0)

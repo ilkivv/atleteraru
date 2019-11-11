@@ -152,7 +152,7 @@
 
                         <div class="ordering-confirm-total">Итого: <strong><?=round($arResult["ORDER_DISCOUNT_PRICE"]+$arResult["DELIVERY_PRICE"],2)?></strong></div>
 
-                        <a href="#" class="screw-button" onclick="$('#sbmt').trigger('click');return false;"><span>Подтвердить заказ</span></a>
+                        <a href="#" class="screw-button" onclick="$('#sbmt').trigger('click');return false;"><span>вашПодтвердить заказ</span></a>
 						<input type="submit" class="hidden-input"  id='sbmt' name="contButton" value="<?= GetMessage("SALE_CONFIRM")?>">
 
                     </div>

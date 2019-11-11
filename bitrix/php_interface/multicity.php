@@ -9,6 +9,8 @@ if ($parts[0] == 'krasnoyarsk') {
 }else {
     $cityID = 74934;
 }
+global $CITY;
+$CITY = $parts[0];
 
 $rsCities = CIBlockElement::GetList(array('SORT'=>'ASC','NAME'=>'ASC'),array(/*'ACTIVE'=>'Y',*/'IBLOCK_ID'=>51,'ID'=>$cityID),false,array("nTopCount"=>1));
 while ($arCity = $rsCities->GetNextElement()) {
