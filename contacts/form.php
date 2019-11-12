@@ -55,7 +55,9 @@ die();
                                 <td>
                                     <label for="captcha" class="label required">Введите число с картинки</label>
                                     <input type="text" class="text-field captcha" id="captcha" name="captcha" />
+
                                     <img class="captcha-img captcha_pic" src="/bitrix/tools/captcha.php?captcha_sid=<?=$code;?>" alt="" />
+                                    <a class="changeUpdateImage" href="#"><i class="fa fa-refresh fa-2x" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -64,7 +66,7 @@ die();
                                     <input type="text" class="text-field" id="feedbackEmail" name="feedbackEmail" />
                                 </td>
                                 <td>
-                                    <a href="#" onclick="$('#feedbackForm').submit();return false;" class="red-button">Отправить сообщение</a>
+                                    <a onclick="$('#feedbackForm').submit();return false;" class="red-button">Отправить сообщение</a>
                                     <input class="hidden-input" type="submit" value="Отправить сообщение" name="feedbackSubmit" id="feedbackSubmit" />
                                 </td>
                             </tr>
@@ -78,4 +80,20 @@ die();
     	 FlashMessage.Show('Данные успешно отправлены');
     	 $('#feedbackForm input,textarea').val('');
      }
-     </script>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.changeUpdateImage').click(function () {
+            $.ajax({
+                url: "/ajax/callbackCaptcha.php",
+                type:'POST',
+                success: function(code){
+                    $('input[name=captcha_sid]').val(code);
+                    $('.captcha-img').attr('src', '/bitrix/tools/captcha.php?captcha_sid=' + code);
+                }
+            });
+
+        });
+    });
+</script>
