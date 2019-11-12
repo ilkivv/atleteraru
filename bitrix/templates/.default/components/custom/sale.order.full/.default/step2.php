@@ -19,7 +19,7 @@ if ($USER->IsAuthorized()) //Если пользователь авторизо�
 </div>
 <form action="#" method="post">
 <input type="hidden" name="PROFILE_ID" value="0">
-<div id="sof-prof-div">                    
+<div id="sof-prof-div">
     <div class="profile-form-container">
         <p class="required-fields"><span>*</span> — поля обязательные для заполнения</p>
 
@@ -56,7 +56,7 @@ if ($USER->IsAuthorized()) //Если пользователь авторизо�
                 <td>
                     <div class="text-field-container">
                         <label for="orderingCity" class="label required j-required j-other-required j-tomsk-required  <?php if ($arResult['arERRORS']['ORDER_PROP_2']){echo "error";}?>">Ваш город</label>
-                        <?php 
+                        <?php
                             $selected = false;
                             $first_city = array();
                         foreach ($arResult["PRINT_PROPS_FORM"]['USER_PROPS_Y'][2]['VARIANTS'] as $k => $v) {
@@ -65,16 +65,16 @@ if ($USER->IsAuthorized()) //Если пользователь авторизо�
                                     $first_city = $v;
                                 }
                                 if (
-                                        ($v['CITY_NAME'] == 'Томск' || $v['CITY_NAME'] == 'Северск') 
+                                        ($v['CITY_NAME'] == 'Томск' || $v['CITY_NAME'] == 'Северск')
                                         && (
-                                                $v['ID'] == (($arResult['POST']['~ORDER_PROP_2'])?$arResult['POST']['~ORDER_PROP_2']:$arUser['PERSONAL_CITY']) 
-                                            ) 
+                                                $v['ID'] == (($arResult['POST']['~ORDER_PROP_2'])?$arResult['POST']['~ORDER_PROP_2']:$arUser['PERSONAL_CITY'])
+                                            )
                                         && (($arResult['POST']['~ORDER_PROP_2'])?$arResult['POST']['~ORDER_PROP_2']:$arUser['PERSONAL_CITY']) >0) {
                                     $selected = $v;
                                     $selector = 'main';
                                 }
                         }
-                        
+
                         if (!$selected && (isset($arResult['POST']['~ORDER_PROP_2']) || $arUser['PERSONAL_CITY'])) {
                             $selected = array('ID'=>0,'CITY_NAME'=>'Другой город');
                             $selector = 'other';
@@ -90,7 +90,7 @@ if ($USER->IsAuthorized()) //Если пользователь авторизо�
                                     <?php foreach ($arResult["PRINT_PROPS_FORM"]['USER_PROPS_Y'][2]['VARIANTS'] as $k => $v) {
                                         if ($v['CITY_NAME'] == 'Томск' || $v['CITY_NAME'] == 'Северск' ) {
                                         ?><div class="item" data-value="<?=$v['ID']?>" ><?=$v['CITY_NAME']?></div>
-                                        <?php 
+                                        <?php
                                         }
                                     }?>
                                     <div class="item" data-value="0">другой город</div>
@@ -111,8 +111,8 @@ if ($USER->IsAuthorized()) //Если пользователь авторизо�
                         <option value="0">--выберите город--</option>
                         <?php foreach ($arResult["PRINT_PROPS_FORM"]['USER_PROPS_Y'][2]['VARIANTS'] as $k => $v) {
                             if (!($v['CITY_NAME'] == 'Томск' || $v['CITY_NAME'] == 'Северск')) {
-                            ?><option value="<?=$v['ID']?>" <?php if ($v['ID'] == $arResult['POST']['~ORDER_PROP_2'] || strtoupper(trim($v['CITY_NAME'])) == strtoupper(trim($arUser['PERSONAL_CITY']))){echo "selected";}?>><?=$v['CITY_NAME']?></option><?php 
-                            } 
+                            ?><option value="<?=$v['ID']?>" <?php if ($v['ID'] == $arResult['POST']['~ORDER_PROP_2'] || strtoupper(trim($v['CITY_NAME'])) == strtoupper(trim($arUser['PERSONAL_CITY']))){echo "selected";}?>><?=$v['CITY_NAME']?></option><?php
+                            }
                         }?>
                         </select>
                         */?>
@@ -191,9 +191,9 @@ if ($USER->IsAuthorized()) //Если пользователь авторизо�
         <div class="text-field-container <?php if ($arResult['arERRORS']['ORDER_PROP_13']){echo "error";}?>">
             <label for="orderingComment" class="label">Комментарий к заказу</label>
             <textarea id="orderingComment" name="ORDER_PROP_13" class="textarea"><?=$arResult['POST']['~ORDER_PROP_13']?></textarea>
-            
+
         </div>
-        <?php 
+        <?php
         //echo strpos($arUser['LOGIN'],'buyer');
         if (!$arUser['UF_COUPON'] && $arResult['POST']['~IS_NEW'] && (false == strpos($arUser['LOGIN'],'buyer'))) {?>
         <div class="text-field-container" id="cartRequest"><br />
@@ -237,18 +237,18 @@ function checkCityChange(obj)
     if (allow) {
         $('input[name="ORDER_PROP_2"]').val(obj.val);
     }
-        
+
 }
 function getLocation(country_id, region_id, city_id, arParams, site_id)
 {
 	BX.showWait();
-	
+
 	property_id = arParams.CITY_INPUT_NAME;
-	
+
 	function getLocationResult(res)
 	{
 		BX.closeWait();
-		
+
 		/*var obContainer = document.getElementById('LOCATION_' + property_id);
 		if (obContainer)
 		{
