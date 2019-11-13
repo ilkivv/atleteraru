@@ -88,11 +88,11 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 		if($arItem['OFFERS_BUY_PROPS'][0]['OLD_PRICE']['VALUE'] != $arItem['OFFERS_BUY_PROPS'][0]['PRICE']['VALUE']) {
                         ?>  <span class="old-price"><? echo $arItem['OFFERS_BUY_PROPS'][0]['OLD_PRICE']['PRINT_VALUE']; ?></span> <?
                         }
-                		?><span class="new-price"><?php 
+                		?><span class="new-price"><?php
                 		if ($arItem['OFFERS_BUY_PROPS'][0]['PRICE']['PRINT_VALUE'])
                 		{
                 			echo $arItem['OFFERS_BUY_PROPS'][0]['PRICE']['PRINT_VALUE'];
-                			//print_r($arItem['OFFERS_BUY_PROPS'][0]); 
+                			//print_r($arItem['OFFERS_BUY_PROPS'][0]);
                 		}
                 		?></span><?php
                 		$hideLink = false;
@@ -107,17 +107,17 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                     $basketLink = '';
                 	    ?><span class="is-empty">Только в розничных магазинах</span>
                 	    <span class="new-price" style="width:100%;height:40px;"><?php if ($arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE']){echo $arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE'] . ' р.';};?></span>
-                	    <?php 
+                	    <?php
                 	}
                 	?></div>
-            	<?php if ($arParams['ALLOW_SALE'] == 'Y'):?><?=$basketLink;	?><?php endif;?>
+            	<?php if ($arParams['ALLOW_SALE'] == 'Y'):?><?=$basketLink;	?><?php endif;echo $arParams['ALLOW_SALE'];?>
             </div>
              <div class="few-products j-error"></div>
             <?php if ($arParams['ALLOW_SALE'] == 'Y'):?><div class="in-basket" <?php if ($arItem['OFFERS_BUY_PROPS'][0]['IN_BASKET']){echo "style='display:block;'";}?>><?php if ($arItem['OFFERS_BUY_PROPS'][0]['IN_BASKET']){?><a href="/personal/basket/">В корзине (<?=$arItem['OFFERS_BUY_PROPS'][0]['IN_BASKET']?>)</a> <span class="j-remove-item">Убрать 1</span><?php }?></div><?php endif;?>
              <?php if (!stristr( $arItem['NAME'],'Подарочный сертификат')){
              if ($arParams['HIDE_EMPTY'] == 'Y' && $hideLink) { } else {
                  ?><a class="quantity j-quantity" data-id="1" href="#">Узнать наличие в магазинах</a><?php
-             } 
+             }
              }?>
             <div class="j-error"></div>
             <?php if (isset($arItem['OFFERS']) && !empty($arItem['OFFERS']))

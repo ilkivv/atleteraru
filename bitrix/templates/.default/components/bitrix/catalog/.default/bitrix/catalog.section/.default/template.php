@@ -46,33 +46,6 @@ if($sectionIds){
 }
 
 ?>
-    <?php
-    global $APPLICATION;
-    //var_dump($APPLICATION->get_cookie("GOROD"));
-    global $_SERVER;
-    $ip = '5.77.5.203';
-    global $APPLICATION;
-    //if($APPLICATION['GOROD'] !== null) {
-        $ip_data = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?lang=ru&ip=" . $ip));
-        if ($ip_data && $ip_data->geoplugin_countryName != null) {
-            $city = $ip_data->geoplugin_city;
-            $APPLICATION->set_cookie("GOROD", $city, 60*60*24);
-            //print_r($city);
-        }
-    //}
-
-    $gorod = CSaleLocation::GetList(
-      array(),
-      array(
-          'CITY_LID' => 'ru',
-          'CITY_NAME' => $city
-      ),
-      false,
-      false,
-      array());
-        //if ($gorod[''])
-        //var_dump($gorod->Fetch());
-    ?>
 
 <? echo $arResult["NAV_STRING"]; ?>
 <div class="catalog-products-list">
@@ -138,7 +111,6 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
 	
 	?>
 	<div class="product-item">
-
 	    <div class="j-catalog-item js-product-container catalog-item"  id="<? echo $strMainID; ?>" rel="<?=$arItem['ID']?>" 
 			data-value="<?=$arItem['IBLOCK_SECTION_ID'];?>" 
 			data-id="<?=$arItem['ID']?>" 
@@ -206,18 +178,16 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
 		{
 			if (!empty($arItem['OFFERS_PROP']) && $arItem['OFFERS_BUY_PROPS']/*|| $arParams['ALLOW_SALE'] == 'N'*/)
 			{
-                 ?>                
+                 ?>
                 <div class="choose-taste j-choose-taste <?php if (count($arItem['OFFERS_BUY_PROPS'])<2){echo "no-arrow";}?>">
                     <div data-value="<?=$arItem['OFFERS_BUY_PROPS'][0]['SKU_ID']?>" class="choose-taste-link j-choose-taste-link" id="<?=$strMainID?>_prop" data-id="<?=$arItem['OFFERS_BUY_PROPS'][0]['ID']?>"><span><?=$arItem['OFFERS_BUY_PROPS'][0]['VALUE']?>  <?php /*?>(<?php if ($arItem['OFFERS_BUY_PROPS'][0]['AMOUNT'] >10){echo ">10";}else{echo $arItem['OFFERS_BUY_PROPS'][0]['AMOUNT']*1;}?>)<?*/?></span> <em></em></div>
                     <div class="choose-taste-list-container">
                         <div class="choose-taste-list j-choose-taste-list">
-                        <?php 
-            				foreach ($arItem['OFFERS_BUY_PROPS'] as $code => $property) {
-
-                                    ?>
-                                    <div class="item"
-                                         data-value="<?= $property['SKU_ID'] ?>"><?= $property['VALUE'] ?><?php /*?> (<?php if ($property['AMOUNT'] >10){echo ">10";}else{echo $property['AMOUNT']*1;}?>)<?*/ ?></div><?php
-                            }
+                        <?php
+            				foreach ($arItem['OFFERS_BUY_PROPS'] as $code => $property)
+            				{
+            				    ?><div class="item" data-value="<?=$property['SKU_ID']?>"><?=$property['VALUE']?><?php /*?> (<?php if ($property['AMOUNT'] >10){echo ">10";}else{echo $property['AMOUNT']*1;}?>)<?*/?></div><?php
+            				}
                         ?>
                         </div>
                     </div>
@@ -225,9 +195,8 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 </div>
                 <?
 			}
-		} 
+		}
 	}?>
-
         <div class="catalog-item-price"<?php if (empty($arItem['MIN_PRICE'])){echo "style='height:70px;'";}?>>
                   <div id="<? echo $arItemIDs['PRICE']; ?>">
                     <?
@@ -237,11 +206,11 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 		if($arItem['OFFERS_BUY_PROPS'][0]['OLD_PRICE']['VALUE'] != $arItem['OFFERS_BUY_PROPS'][0]['PRICE']['VALUE']) {
                         ?>  <span class="old-price"><? echo $arItem['OFFERS_BUY_PROPS'][0]['OLD_PRICE']['PRINT_VALUE']; ?></span> <?
                         }
-                		?><span class="new-price"><?php 
+                		?><span class="new-price"><?php
                 		if ($arItem['OFFERS_BUY_PROPS'][0]['PRICE']['PRINT_VALUE'])
                 		{
                 			echo $arItem['OFFERS_BUY_PROPS'][0]['PRICE']['PRINT_VALUE'];
-                			//print_r($arItem['OFFERS_BUY_PROPS'][0]); 
+                			//print_r($arItem['OFFERS_BUY_PROPS'][0]);
                 		}
                 		?></span><?php
                 		$hideLink = false;
@@ -257,7 +226,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                     $basketLink = '';
                 	    ?><span class="is-empty" style="margin-top:20px;margin-bottom:10px;">Только в розничных магазинах</span>
                 	    <span class="new-price" style="width:100%;height:40px;"><?php if ($arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE']){echo $arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE'] . ' р.';};?></span>
-                	    <?php 
+                	    <?php
                 	}
                 	?></div>
             	<?php if ($arParams['ALLOW_SALE'] == 'Y'):?><?=$basketLink;	?><?php endif;?>
@@ -274,13 +243,6 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
     <script type="text/javascript">
     var <? echo $strObName; ?> = <? echo CUtil::PhpToJSObject($arItem['JS_OFFERS'], false, true); ?>;
     </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                    $location = ymaps.geolocation.get({provider: 'yandex'}).then(function (result) {
-                        console.log(result);
-                });
-            });
-        </script>
      <?php }?>
     </div></div><?
     }

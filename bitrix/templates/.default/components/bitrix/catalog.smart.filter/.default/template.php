@@ -87,10 +87,23 @@ CJSCore::Init(array("fx"));
                         <?php 
                         $selected_brand = array('ID'=>0,'VALUE'=>'Все');
                         CModule::IncludeModule("iblock");
+
                         $property_enums = CIBlockPropertyEnum::GetList(Array("VALUE"=>"ASC", "SORT"=>"ASC"), Array("IBLOCK_ID"=>45, "CODE"=>"CML2_MANUFACTURER"));
+
+                        $brandFilter = CIBlockElement::GetList(Array("ID"=>"ASC"), Array("IBLOCK_ID"=>45, "ACTIVE"=>"Y",'SECTION_ID' => $arParams['SECTION_ID']), array('PROPERTY_CML2_MANUFACTURER'),array("nPageSize"=>50000), array());
+                        while($brand = $brandFilter->Fetch()){
+                            if ($brand['PROPERTY_CML2_MANUFACTURER_ENUM_ID'] !== NULL){
+                                $arBrandsProductCurrentCategory[] = $brand['PROPERTY_CML2_MANUFACTURER_ENUM_ID'];
+                            }
+                        }
+
                         while($enum_fields = $property_enums->GetNext())
                         {
-                            $brands[] = $enum_fields;
+                            if (in_array($enum_fields['ID'], $arBrandsProductCurrentCategory)){
+                                $brands[] = $enum_fields;
+                            }
+
+
                             if ($enum_fields['ID'] == $_GET['brand']) {
                             $selected_brand = $enum_fields;
                             }
@@ -103,6 +116,15 @@ CJSCore::Init(array("fx"));
                                     <div class="item" data-value="0">Все</div><?
                                     foreach ($brands as $lk => $enum_fields)
                                     {
+                                        //var_dump($enum_fields);
+                                        /*if (CModule::IncludeModule('catalog')) {
+                                            $catalogProduct = CCatalogProduct::GetList();
+                                            foreach ($products = $catalogProduct->Fetch() as $product){
+                                                //var_dump($products);die;
+                                            }
+
+                                        }*/
+                                        //var_dump($enum_fields);
                                         //if ($enum_fields['ID'] != $selected_brand['ID']) {
                                         echo '<div class="item" data-value="'.$enum_fields["ID"].'">'.$enum_fields["VALUE"].'</div>';
                                        // }
