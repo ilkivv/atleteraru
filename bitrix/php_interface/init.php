@@ -31,7 +31,7 @@ function _Check404Error(){
 You can place here your functions and event handlers
 
 AddEventHandler("module", "EventName", "FunctionName");
-function FunctionName(params)
+function FunctionName(params
 {
 	//code
 }
@@ -221,12 +221,14 @@ function addCard($card)
         $arCoupon = $dbCoupon->Fetch ();
         if ($arCoupon[ 'ID' ] > 0) {
             $arCoupon[ 'DISCOUNT_ID' ] = $discountId;
+            $arCoupon[ 'ACTIVE' ] = 'Y';
             $arCoupon[ 'COUPON' ] = "" . $card[ 'НомерКарты' ];
             $arCoupon[ 'DESCRIPTION' ] = "" . $card[ 'ФИОВладельца' ];
             $id = $arCoupon[ 'ID' ];
             unset ($arCoupon[ 'ID' ]);
             CCatalogDiscountCoupon::Update ($id, $arCoupon);
             $newCouponId = $arCoupon[ 'ID' ];
+            echo "<br /> updated<br />";
         } else {
             $cardParams = array (
                 'DISCOUNT_ID' => $discountId,
@@ -239,6 +241,9 @@ function addCard($card)
             );
             $newCouponId = CCatalogDiscountCoupon::Add ($cardParams);
         }
+        CCatalogDiscount::Update ($discountId, array (
+            "ACTIVE" => "Y"
+        ));
     } else {
         echo "not loaded card";
     }
@@ -247,16 +252,9 @@ function addCard($card)
 function deactivateDiscounts()
 {
     CModule::IncludeModule ("catalog");
-    $Result = CCatalogDiscount::GetList (array (), array (
-        'VALUE_TYPE' => 'P',
-        'CURRENCY' => 'RUB'
-    ), false, false, array (
-        'ID'
-    ));
-    while ( $arResult = $Result->Fetch () ) {
-        CCatalogDiscount::Update ($arResult[ 'ID' ], array (
-            "ACTIVE" => "N"
-        ));
+    $dbCoupon = CCatalogDiscountCoupon::GetList (array (), array());
+    while ($arCoupon = $dbCoupon->Fetch ()) {
+        CCatalogDiscountCoupon::Update ($arCoupon['ID'], array('ACTIVE'=>'N','COUPON'=>$arCoupon['COUPON'].'OLD'.rand(1,1000)));
     }
 }
 
@@ -272,6 +270,7 @@ function importCards()
     ));
     $cards = array ();
     if ($row = $res->Fetch ()) {
+
         $cards = $obXMLFile->GetAllChildrenArray ($row[ 'ID' ]);
     }
 
@@ -573,9 +572,11 @@ function processIBlockOption()
 
 function customCatalogImportStep()
 {
+    //mylog('rabotaet');
     global $DIR_NAME;
     $NS = &$_SESSION[ "BX_CML2_IMPORT" ][ "NS" ];
     if (! $NS[ 'custom' ][ 'cards_loaded' ]) {
+        echo "start prepare cards";
         importCards ();
     }
     if (! $NS[ 'custom' ][ 'iblock_option_processed' ]) {
