@@ -70,11 +70,12 @@ var CURRENT_CITY_URL = 'https://<?=$GLOBALS['CURRENT_CITY']['PROPERTIES']['domai
 	<script type="text/javascript" src="/bitrix/templates/atlet/js/enquire.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/atlet/js/scrollpane.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/atlet/js/carousel.js"></script>
+
 	<script type="text/javascript" src="/bitrix/templates/atlet/js/functions.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/atlet/js/up-button.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/atlet/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/libs/stacktable/stacktable.js"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/libs/slick/slick.min.js"></script>	
+	<script type="text/javascript" src="/bitrix/templates/.default/libs/slick/slick.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/custom.js?v=6"></script>
 	<!-- Yandex.Metrika counter -->
 <script type="text/javascript">
