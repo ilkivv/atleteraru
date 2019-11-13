@@ -1003,7 +1003,6 @@ else
 
 
 				$order = CSaleOrder::getByID($arResult["ORDER_ID"]);
-                var_dump($order);
 				$dbBasketItems = CSaleBasket::GetList(
 					array("ID" => "ASC"),
 					array(
@@ -1040,14 +1039,11 @@ else
                         $storeProduct = $storeProduct->Fetch();
 
                         if ($storeProduct['AMOUNT'] >= $arBasketItems['QUANTITY']){
-                            $result = CCatalogStoreProduct::Update($storeProduct['ID'], array(
+                             CCatalogStoreProduct::Update($storeProduct['ID'], array(
                                 'AMOUNT' => $storeProduct['AMOUNT'] - $arBasketItems['QUANTITY'],
                             ));
                         }
                     }
-
-
-                    die($result);
 				}
 				$totalOrderPrice = $arResult["ORDER_PRICE"] + $arResult["DELIVERY_PRICE"] + $arResult["TAX_PRICE"] - $arResult["DISCOUNT_PRICE"];
 				CSaleOrder::Update($arResult["ORDER_ID"], Array("PRICE" => $totalOrderPrice));
