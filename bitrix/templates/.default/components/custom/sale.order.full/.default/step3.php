@@ -11,7 +11,57 @@
 	}
 	global $price;
 	?>
+<?php
+$arID = array();
+$arBasketItems = array();
+$dbBasketItems = CSaleBasket::GetList(
+    array(
+        "NAME" => "ASC",
+        "ID" => "ASC"
+    ),
+    array(
+        "FUSER_ID" => CSaleBasket::GetBasketUserID(),
+        "LID" => SITE_ID,
+        "ORDER_ID" => "NULL",
+        "CAN_BUY" => 'Y'
+    ),
+    false,
+    false,
+    array("ID", "CALLBACK_FUNC", "MODULE", "PRODUCT_ID", "QUANTITY", "PRODUCT_PROVIDER_CLASS")
+);
 
+while ($arItems = $dbBasketItems->Fetch())
+{
+    if ('' != $arItems['PRODUCT_PROVIDER_CLASS'] || '' != $arItems["CALLBACK_FUNC"])
+    {
+        $arBasketItems[] = $arItems;
+    }
+}
+$arCheckDelivery = array();
+if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
+    foreach ($arBasketItems as $key => $arBasketItem){
+        foreach ($arResult['DELIVERY'] as $keyChildren => $arDelivery) {
+            $storeID = explode(";", $arDelivery['STORE']);
+            $storeID = substr($storeID[2], 0, 1);
+            $storeID = ($storeID > 0) ? $storeID : NULL;
+            if ($storeID !== NULL){
+                $storeItem = CCatalogStoreProduct::GetList(
+                    array(),
+                    array(
+                        'PRODUCT_ID' => $arBasketItem['PRODUCT_ID'],
+                        'STORE_ID' => $storeID
+                    )
+                )->Fetch();
+                if($storeItem['AMOUNT'] < (int) $arBasketItem['QUANTITY']){
+                    $arCheckDelivery[$arDelivery['ID']]['DISPLAY'] = 'N';
+                }
+            }
+
+        }
+
+    }
+}
+?>
 <div class="ordering-step" style="display:none;">Оформление заказа: шаг 2 из 3</div>
 
 <h1>Способ доставки</h1>
@@ -30,86 +80,103 @@
 						$first = true;
 					foreach ($arResult["DELIVERY"] as $delivery_id => $arDelivery)
 					{
-						if ($delivery_id !== 0 && intval($delivery_id) <= 0):
-					?><?
-						foreach ($arDelivery["PROFILES"] as $profile_id => $arProfile)
-						{
-						    if ($first) {
-						        $arProfile["CHECKED"] = 'Y';
-						        $first = false;
-						    } else {
-                                $arProfile["CHECKED"] = 'N';
-                            }
-							?>
-						<tr>
-							<td>
-							<div class="radio"><input type="radio" id="ID_DELIVERY_<?=$delivery_id?>_<?=$profile_id?>" name="<?=$arProfile["FIELD_NAME"]?>" value="<?=$delivery_id.":".$profile_id;?>" <?=$arProfile["CHECKED"] == "Y" ? "checked=\"checked\"" : "";?> />
-								<label for="ID_DELIVERY_<?=$delivery_id?>_<?=$profile_id?>">
-									<span><?=$arDelivery["TITLE"]?> <?=$arProfile["TITLE"]?></span>
-								</label>
-							</div>
-							</td>
-							<td>
-							<?php //print_r($arResult['BASKET_ITEMS']);?>
-							<?$APPLICATION->IncludeComponent('bitrix:sale.ajax.delivery.calculator', '', array(
-									"NO_AJAX" => $arParams["SHOW_AJAX_DELIVERY_LINK"] == 'S' ? 'Y' : 'N',
-									"DELIVERY" => $delivery_id,
-									"PROFILE" => $profile_id,
-							        'ITEMS'=>$arResult['BASKET_ITEMS'],
-									"ORDER_WEIGHT" => $arResult["ORDER_WEIGHT"],
-									"ORDER_PRICE" => $arResult["ORDER_PRICE"],
-									"LOCATION_TO" => $arResult["DELIVERY_LOCATION"],
-									"LOCATION_ZIP" => $arResult['POST']['~ORDER_PROP_4'],
-									"CURRENCY" => $arResult["BASE_LANG_CURRENCY"],
-								));
-							?>
-							<?if ($arParams["SHOW_AJAX_DELIVERY_LINK"] == 'N'):?>
-							<script type="text/javascript">deliveryCalcProceed({STEP:1,DELIVERY:'<?=CUtil::JSEscape($delivery_id)?>',PROFILE:'<?=CUtil::JSEscape($profile_id)?>',WEIGHT:'<?=CUtil::JSEscape($arResult["ORDER_WEIGHT"])?>',PRICE:'<?=CUtil::JSEscape($arResult["ORDER_PRICE"])?>',LOCATION:'<?=intval($arResult["DELIVERY_LOCATION"])?>',CURRENCY:'<?=CUtil::JSEscape($arResult["BASE_LANG_CURRENCY"])?>'})</script>
-							<?endif;?>
-							<?if (strlen($arProfile["DESCRIPTION"]) > 0):?><div class="delivery-condition">
-									<?=nl2br($arProfile["DESCRIPTION"])?></div><?endif;?>
-							</td>
-						</tr>
-								<?
-						} // endforeach
-					?>
-                        
-                        
-                        <?
-						else:
-						?>
-					<tr>
-						<td >
-						<div class="radio">
-							<input type="radio" id="ID_DELIVERY_ID_<?= $arDelivery["ID"] ?>" name="<?=$arDelivery["FIELD_NAME"]?>" value="<?= $arDelivery["ID"] ?>"<?if ($arDelivery["CHECKED"]=="Y") echo " checked";?>>
-							<label for="ID_DELIVERY_ID_<?= $arDelivery["ID"] ?>">
-							<span><?= $arDelivery["NAME"] ?></span></label>
-							</label>
-						</div>
-						</td>
-						<td>
-						<?=GetMessage("SALE_DELIV_PRICE");?> <?=$arDelivery["PRICE_FORMATED"]?><br />
-							<?
-							if (strlen($arDelivery["DESCRIPTION"])>0 || strlen($arDelivery["PERIOD_TEXT"])>0)
-							{
-							?>
-							<div class="delivery-condition">
-                                    <?=$arDelivery["DESCRIPTION"]?>
+
+                        if (!isset($arCheckDelivery[$arDelivery['ID']]['DISPLAY'])) {
+                            if ($delivery_id !== 0 && intval($delivery_id) <= 0):
+                                ?><?
+                                foreach ($arDelivery["PROFILES"] as $profile_id => $arProfile) {
+                                    if ($first) {
+                                        $arProfile["CHECKED"] = 'Y';
+                                        $first = false;
+                                    } else {
+                                        $arProfile["CHECKED"] = 'N';
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <div class="radio"><input type="radio"
+                                                                      id="ID_DELIVERY_<?= $delivery_id ?>_<?= $profile_id ?>"
+                                                                      name="<?= $arProfile["FIELD_NAME"] ?>"
+                                                                      value="<?= $delivery_id . ":" . $profile_id; ?>" <?= $arProfile["CHECKED"] == "Y" ? "checked=\"checked\"" : ""; ?> />
+                                                <label for="ID_DELIVERY_<?= $delivery_id ?>_<?= $profile_id ?>">
+                                                    <span><?= $arDelivery["TITLE"] ?> <?= $arProfile["TITLE"] ?></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <?php //print_r($arResult['BASKET_ITEMS']);
+                                            ?>
+                                            <? $APPLICATION->IncludeComponent('bitrix:sale.ajax.delivery.calculator', '', array(
+                                                "NO_AJAX" => $arParams["SHOW_AJAX_DELIVERY_LINK"] == 'S' ? 'Y' : 'N',
+                                                "DELIVERY" => $delivery_id,
+                                                "PROFILE" => $profile_id,
+                                                'ITEMS' => $arResult['BASKET_ITEMS'],
+                                                "ORDER_WEIGHT" => $arResult["ORDER_WEIGHT"],
+                                                "ORDER_PRICE" => $arResult["ORDER_PRICE"],
+                                                "LOCATION_TO" => $arResult["DELIVERY_LOCATION"],
+                                                "LOCATION_ZIP" => $arResult['POST']['~ORDER_PROP_4'],
+                                                "CURRENCY" => $arResult["BASE_LANG_CURRENCY"],
+                                            ));
+                                            ?>
+                                            <? if ($arParams["SHOW_AJAX_DELIVERY_LINK"] == 'N'):?>
+                                                <script type="text/javascript">deliveryCalcProceed({
+                                                        STEP: 1,
+                                                        DELIVERY: '<?=CUtil::JSEscape($delivery_id)?>',
+                                                        PROFILE: '<?=CUtil::JSEscape($profile_id)?>',
+                                                        WEIGHT: '<?=CUtil::JSEscape($arResult["ORDER_WEIGHT"])?>',
+                                                        PRICE: '<?=CUtil::JSEscape($arResult["ORDER_PRICE"])?>',
+                                                        LOCATION: '<?=intval($arResult["DELIVERY_LOCATION"])?>',
+                                                        CURRENCY: '<?=CUtil::JSEscape($arResult["BASE_LANG_CURRENCY"])?>'
+                                                    })</script>
+                                            <? endif; ?>
+                                            <? if (strlen($arProfile["DESCRIPTION"]) > 0):?>
+                                                <div class="delivery-condition">
+                                                <?= nl2br($arProfile["DESCRIPTION"]) ?></div><? endif; ?>
+                                        </td>
+                                    </tr>
                                     <?
-							if (strlen($arDelivery["PERIOD_TEXT"])>0)
-							{
-								echo $arDelivery["PERIOD_TEXT"];
-								?><?
-							}
-							?>
-                                </div>
-                            <?
-							}
-							?>
-						</td>
-					</tr>
-                        <?php endif;?>
-                        <?php }?>
+                                } // endforeach
+                                ?>
+
+
+                                <?
+                            else:
+                                ?>
+                                <tr>
+                                    <td>
+                                        <div class="radio">
+                                            <input type="radio" id="ID_DELIVERY_ID_<?= $arDelivery["ID"] ?>"
+                                                   name="<?= $arDelivery["FIELD_NAME"] ?>"
+                                                   value="<?= $arDelivery["ID"] ?>"<? if ($arDelivery["CHECKED"] == "Y") echo " checked"; ?>>
+                                            <label for="ID_DELIVERY_ID_<?= $arDelivery["ID"] ?>">
+                                                <span><?= $arDelivery["NAME"] ?></span></label>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <?= GetMessage("SALE_DELIV_PRICE"); ?> <?= $arDelivery["PRICE_FORMATED"] ?><br/>
+                                        <?
+                                        if (strlen($arDelivery["DESCRIPTION"]) > 0 || strlen($arDelivery["PERIOD_TEXT"]) > 0) {
+                                            ?>
+                                            <div class="delivery-condition">
+                                                <?= $arDelivery["DESCRIPTION"] ?>
+                                                <?
+                                                if (strlen($arDelivery["PERIOD_TEXT"]) > 0) {
+                                                    echo $arDelivery["PERIOD_TEXT"];
+                                                    ?><?
+                                                }
+                                                ?>
+                                            </div>
+                                            <?
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                            <?php
+                        }
+
+                        }?>
                         <?php } else {?>
                         <tr>
 						<td >

@@ -24,7 +24,7 @@
 
                     <table class="ordering-table">
                     <?
-                    
+
                     if ($arResult["DELIVERY"]) {
 
 						$first = true;
@@ -73,8 +73,8 @@
 								<?
 						} // endforeach
 					?>
-                        
-                        
+
+
                         <?
 						else:
 						?>

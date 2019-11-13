@@ -2,7 +2,7 @@
 <?
 if (!$USER->IsAuthorized())
 {
-	echo ShowError($arResult["ERROR_MESSAGE"]);	
+	echo ShowError($arResult["ERROR_MESSAGE"]);
 	include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/auth.php");
 }
 else
@@ -16,11 +16,11 @@ else
 	<?
 	if($arParams["SHOW_MENU"] == "Y")
 	{
-		?>		
+		?>
 		<tr>
 			<td>
 			<?if ($arResult["CurrentStep"] < 6):?>
-				
+
 				<?
 				$arMenuLine = array(
 						0 => GetMessage("STOF_PERSON_TYPE"),
@@ -31,7 +31,7 @@ else
 					);
 				for ($i = 0; $i < count($arMenuLine); $i++)
 				{
-					
+
 					//if ($arResult["SKIP_FIRST_STEP"] == "Y" && $i == 0)
 						//continue;
 					if ($arResult["SKIP_FIRST_STEP"] == "Y" && $i == 0)
@@ -43,7 +43,7 @@ else
 					if ($arResult["SKIP_FORTH_STEP"] == "Y" && $i == 3)
 						continue;
 
-					
+
 					if ($i > 0)
 						echo " &gt; ";
 
@@ -55,7 +55,7 @@ else
 						echo $arMenuLine[$i];
 				}
 				?>
-				
+
 			<?endif;?>
 			</td>
 		</tr>
@@ -64,7 +64,7 @@ else
 	?>
 	<tr>
 		<td><br />
-			<? echo ShowError($arResult["ERROR_MESSAGE"]); 
+			<? echo ShowError($arResult["ERROR_MESSAGE"]);
 			if ($arResult["CurrentStep"] == 1)
 				include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/step1.php");
 			elseif ($arResult["CurrentStep"] == 2)
