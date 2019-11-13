@@ -198,11 +198,11 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 		if($arItem['OFFERS_BUY_PROPS'][0]['OLD_PRICE']['VALUE'] != $arItem['OFFERS_BUY_PROPS'][0]['PRICE']['VALUE']) {
                         ?>  <span class="old-price"><? echo $arItem['OFFERS_BUY_PROPS'][0]['OLD_PRICE']['PRINT_VALUE']; ?></span> <?
                         }
-                		?><span class="new-price"><?php 
+                		?><span class="new-price"><?php
                 		if ($arItem['OFFERS_BUY_PROPS'][0]['PRICE']['PRINT_VALUE'])
                 		{
                 			echo $arItem['OFFERS_BUY_PROPS'][0]['PRICE']['PRINT_VALUE'];
-                			//print_r($arItem['OFFERS_BUY_PROPS'][0]); 
+                			//print_r($arItem['OFFERS_BUY_PROPS'][0]);
                 		}
                 		?></span><?php
                 		$hideLink = false;
@@ -218,7 +218,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                     $basketLink = '';
                 	    ?><span class="is-empty" style="margin-top:20px;">Только в розничных магазинах</span>
                 	    <span class="new-price" style="width:100%;height:40px;"><?php if ($arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE']){echo $arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE'] . ' р.';};?></span>
-                	    <?php 
+                	    <?php
                 	}
                 	?></div>
             	<?php if ($arParams['ALLOW_SALE'] == 'Y'):?><?=$basketLink;	?><?php endif;?>
