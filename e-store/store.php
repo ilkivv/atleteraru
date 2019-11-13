@@ -1,5 +1,6 @@
 <?
 require ($_SERVER[ "DOCUMENT_ROOT" ] . "/bitrix/header.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 $APPLICATION->RestartBuffer();
 if (!defined('PUBLIC_AJAX_MODE')) {
     define('PUBLIC_AJAX_MODE', true);
@@ -19,10 +20,12 @@ if (CModule::IncludeModule ("catalog")) {
         $SKU[$arOffer['ID']] = $arOffer;
     }
 }
+
 $rsStore = CCatalogStore::GetList(
     array('SORT'=>'ASC'),
     array('ACTIVE'=>'Y','ISSUING_CENTER'=>(($_GLOBALS['CURRENT_CITY']['PROPERTIES']['SALEALLOW']['VALUE_XML_ID'] == 'Y')?'N':'Y'),'SHIPPING_CENTER'=>(($_GLOBALS['CURRENT_CITY']['PROPERTIES']['SALEALLOW']['VALUE_XML_ID'] == 'Y')?'N':'Y'),'ID'=>$_GLOBALS['CURRENT_CITY']['PROPERTIES']['stories']['VALUE'])
 );
+
 while ($arStore = $rsStore->Fetch()){
     $stories[$arStore['ID']] = $arStore;
 
@@ -30,6 +33,7 @@ while ($arStore = $rsStore->Fetch()){
 $rsStore = CCatalogStoreProduct::GetList(array(), array('PRODUCT_ID' =>$SKUIDS));
 while ($arStore = $rsStore->Fetch()){
     $amount[$arStore['STORE_ID']][] = $arStore;
+
 }
 $rsProduct = CIBlockElement::GetList (array (), array (
     'IBLOCK_ID' => 45,
@@ -61,11 +65,32 @@ $arProduct = $rsProduct->Fetch();
                     <ul>
                         <?php if ($amount[$v['ID']]) {
                             $amountCnt = 0;
+                            //var_dump($v);
+
+
                             ?>
                             <?php foreach ($amount[$v['ID']] as $ak => $av) {
-                                if ($av['AMOUNT'] >0) {
+
+                                if ($av['AMOUNT']>0) {
+
+                                    $arPrice = CPrice::GetList(array(), array(
+                                        'PRODUCT_ID' => $av['PRODUCT_ID'],
+                                        'CATALOG_GROUP_ID' => $arTypePriceToStore[$av['STORE_ID']]
+                                    ));
+
+                                    $discount = CCatalogDiscount::GetDiscountByProduct($av['PRODUCT_ID']);
+
+                                    while($row = $arPrice->Fetch()){
+                                        $priceItem = $row;
+                                    }
+
+                                    if (!empty($discount)){
+                                        $discount = (int) $priceItem['PRICE'] / (int) ($discount[0]['VALUE']);
+                                    }else{
+                                        $discount = 0;
+                                    }
                                     $amountCnt = 1;
-                                    ?><li><?=$SKU[$av['PRODUCT_ID']]['CML2_ATTRIBUTES']['VALUE']?> (<?=$av['AMOUNT']?>)</li><?php
+                                    ?><li><?=$SKU[$av['PRODUCT_ID']]['CML2_ATTRIBUTES']['VALUE']?> (<?=$av['AMOUNT']?>) - <?= $priceItem['PRICE'] - $discount;?> р.</li><?php
                                 }
                             }
                             if (!$amountCnt) {

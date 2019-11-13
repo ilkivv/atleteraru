@@ -10,8 +10,11 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/include/seo.php
 	
 	
 if (file_exists($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/include/events.php"))
-	require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/include/events.php"); 
-	
+	require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/include/events.php");
+
+if (file_exists($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/include/_const.php"))
+    require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/include/_const.php");
+
 
 AddEventHandler('main', 'OnEpilog', '_Check404Error');
 

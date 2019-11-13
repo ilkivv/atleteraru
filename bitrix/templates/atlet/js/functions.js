@@ -130,10 +130,10 @@ $(document).ready(function() {
             data: 'json'
         };
         $.post('/e-store/buy.php', params, function(resp) {
-			
+
 			//console.log(resp);
-			
-			
+
+
             $('#' + container_id).find('.j-error').hide();
             if (resp.submitOn) {
                 if (resp.quantity) {
@@ -226,12 +226,12 @@ $(document).ready(function() {
     });
 });
 
-var recoveryPassSuccess = function(e) {  
+var recoveryPassSuccess = function(e) {
 
-  var container = $('#pForgotForm');  
+  var container = $('#pForgotForm');
   container.find('.j-recover-block').hide();
-  container.find('.j-success-block').fadeIn(300);   
- 
+  container.find('.j-success-block').fadeIn(300);
+
 }
 
 
@@ -282,7 +282,7 @@ Auth.prototype.init = function() {
     });
     cmp.getPass.on("click", function(e) {
         e.preventDefault();
-        
+
         //cmp.recover.hide();
         //cmp.success.fadeIn(300);
     });
@@ -308,9 +308,9 @@ Tabs.prototype.init = function() {
     var cmp = this;
     cmp.tabs.click(function(e) {
         e.preventDefault();
-		
+
 		console.log(cmp);
-		
+
         if (!$(this).hasClass('active')) {
             cmp.tabs.removeClass('active');
             $(this).addClass('active');
@@ -686,15 +686,15 @@ function bindAjaxForm() {
             $(jqForm).find('.error').removeClass('error');
         }
     };
-		
-	
+
+
     $('form.ajaxform').ajaxForm(options);
 }
 
 function sendComment(e){
-	
+
 	alert(e.msg);
-	
+
 	window.location.reload();
 }
 
@@ -702,11 +702,11 @@ function sendComment(e){
 onAjaxSubmitForm = function(response, statusText, xhr, form) {
     $('#wait').html('');
     $('.j-error').html('');
-    
+
  /*    console.log(response);
-   
+
    return false; */
-    
+
     if (statusText == 'success') {
         $(form).find('.error-message').empty().hide();
         $(form).find('.error').removeClass('error');
@@ -728,7 +728,7 @@ onAjaxSubmitForm = function(response, statusText, xhr, form) {
                 }
             } else if (response.callFunc) {
                 try {
-                    (function(e) {                        
+                    (function(e) {
                         var e = response;
                         console.log('---------');
                         console.log(e);
@@ -737,11 +737,11 @@ onAjaxSubmitForm = function(response, statusText, xhr, form) {
                     })();
                 } catch (e) {}
             } else {}
-        }        
-        
-        
+        }
+
+
         if (response.errors) {
-          
+
             for (var ctrlErr in response.errors) {
                 $('#err_' + $(form).attr('id') + '_' + ctrlErr).html(response.errors[ctrlErr]).show();
                 $('.j-err_' + $(form).attr('id') + '_' + ctrlErr).html(response.errors[ctrlErr]).show();
@@ -749,10 +749,10 @@ onAjaxSubmitForm = function(response, statusText, xhr, form) {
                 $('#' + $(form).attr('id') + ' textarea[name="' + ctrlErr + '"]').addClass('error');
             }
         }
-		
-	 
+
+
 		var img;
-		
+
         if (img = $(form).find('.captcha_pic')) {
             img.attr('src', '/bitrix/tools/captcha.php?captcha_sid=' + response.captcha);
             $(form).find('input[name="captcha_sid"]').val(response.captcha);

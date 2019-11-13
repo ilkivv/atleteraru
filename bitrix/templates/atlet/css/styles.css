@@ -1792,7 +1792,7 @@ a.basket.full {
     font: 14px/18px "Clear Sans", sans-serif;
     color: #bbc0c2;
     white-space: nowrap;
-    z-index: 5;
+    z-index: 15;
 }
 
 .change-location__label {
@@ -1860,6 +1860,7 @@ a.basket.full {
     padding: 15px 20px;
     border-radius: 8px;
     transition: all .3s ease;
+    z-index: 999999;
 }
 
 ._opened .change-location__dropdown {
@@ -2029,7 +2030,7 @@ a.basket.full {
 }
 
 #main {
-    width: 990px;
+    width: 1120px;
     margin: 0 auto;
     position: relative;
 }
@@ -2258,7 +2259,7 @@ a.basket.full {
 
 .content {
     float: right;
-    width: 690px;
+    width: 820px;
     padding: 30px 30px 0 0;
 }
 
@@ -5993,7 +5994,7 @@ a.add-comment:hover span::before {
     }
 
     .header, .footer, #menu ul, .footer-menu ul, #main {
-        width: 1231px;
+        width: 1340px;
     }
 
     .header-auth-reg {
@@ -6013,7 +6014,7 @@ a.add-comment:hover span::before {
     }
 
     .content {
-        width: 931px;
+        width: 1041px;
     }
 
     .carousel-container {
@@ -6154,7 +6155,7 @@ a.add-comment:hover span::before {
     }
 
     .header, .footer, #menu ul, .footer-menu ul, #main {
-        width: 1472px;
+        width: 1522px;
     }
 
     .content {
