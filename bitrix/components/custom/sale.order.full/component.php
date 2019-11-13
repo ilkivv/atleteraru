@@ -1019,8 +1019,6 @@ else
 				while ($arBasketItems = $dbBasketItems->GetNext())
 				{
 					$arResult["ORDER_PRICE"] += DoubleVal($arBasketItems["PRICE"]) * DoubleVal($arBasketItems["QUANTITY"]);
-                    var_dump($arBasketItems);
-                    var_dump($arBasketItems['STORE_ID']);
                     if (is_int((int) $order['STORE_ID']) && $order['STORE_ID'] > 0) {
                         $storeProduct = CCatalogStoreProduct::GetList(array(), array(
                             'PRODUCT_ID' => $arBasketItems['PRODUCT_ID'],
@@ -1028,8 +1026,6 @@ else
                         ));
                         $storeProduct = $storeProduct->Fetch();
 
-                        var_dump($storeProduct);
-                        var_dump($arBasketItems['QUANTITY']);
                         if ($storeProduct['AMOUNT'] >= $arBasketItems['QUANTITY']){
                             $result = CCatalogStoreProduct::Update($storeProduct['ID'], array(
                                 'AMOUNT' => $storeProduct['AMOUNT'] - $arBasketItems['QUANTITY'],
@@ -1043,8 +1039,6 @@ else
                         ));
                         $storeProduct = $storeProduct->Fetch();
 
-                        var_dump($storeProduct);
-                        var_dump($arBasketItems['QUANTITY']);
                         if ($storeProduct['AMOUNT'] >= $arBasketItems['QUANTITY']){
                             $result = CCatalogStoreProduct::Update($storeProduct['ID'], array(
                                 'AMOUNT' => $storeProduct['AMOUNT'] - $arBasketItems['QUANTITY'],
