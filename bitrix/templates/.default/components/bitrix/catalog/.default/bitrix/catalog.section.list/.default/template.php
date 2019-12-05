@@ -167,7 +167,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
 			$boolFirst = true;
 			foreach ($arResult['SECTIONS'] as &$arSection)
 			{
-				
+
 				?>
 				<a href="<? echo $arSection["SECTION_PAGE_URL"]; ?>" class="item">
                         <img src="/bitrix/templates/atlet/tmp/item1.jpg" alt="" />

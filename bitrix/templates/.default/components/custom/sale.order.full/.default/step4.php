@@ -26,6 +26,25 @@
 <table class="ordering-table">
     <?
     foreach ($arResult["PAY_SYSTEM"] as $arPaySystem) {
+        /*if ($arResult['DELIVERY']['ID'] ==  && $arResult['DELIVERY']['ID'] == 1) {
+            ?>
+            <tr>
+                <td>
+                    <div class="radio">
+                        <input type="radio" id="ID_PAY_SYSTEM_ID_<?= $arPaySystem["ID"] ?>" name="PAY_SYSTEM_ID"
+                               value="<?= $arPaySystem["ID"] ?>"<? if ($arPaySystem["CHECKED"] == "Y") echo " checked"; ?>>
+                        <label for="ID_PAY_SYSTEM_ID_<?= $arPaySystem["ID"] ?>">
+                            <span><?= $arPaySystem["PSA_NAME"] ?></span>
+                        </label>
+                    </div>
+                    <?
+                    if (strlen($arPaySystem["DESCRIPTION"]) > 0)
+                        echo "<br /><span style='font-size:14px;margin-left:30px;'>" . $arPaySystem["DESCRIPTION"] . '</span>';
+                    ?>
+                </td>
+            </tr>
+            <?
+        }*/
         if ($arResult['DELIVERY']['ID'] == 2 ||$arResult['DELIVERY']['ID'] == 3) {
             ?>
             <tr>
@@ -45,7 +64,7 @@
             </tr>
             <?
         } else {
-            if ($arPaySystem["ID"] != 1) {
+            if ($arPaySystem["ID"]) {
                 ?>
                 <tr>
                     <td>

@@ -20,20 +20,20 @@ foreach($arResult['ITEMS'] as $arItem){
 		if($arItem['IBLOCK_SECTION_ID']){
 			$sectionIds[$arItem['IBLOCK_SECTION_ID']] = $arItem['IBLOCK_SECTION_ID'];
 		}
-		
+
 }
 
 
 $arResult['SECTIONS_ITEMS'] = array();
 
 if($sectionIds){
-	
+
 	$rsSect = CIBlockSection::GetList(array(), array('ID' =>$sectionIds), false, array('ID', 'NAME'));
 	while($arSect = $rsSect->GetNext())
 	{
 	   $arResult['SECTIONS_ITEMS'][$arSect['ID']] = $arSect;
 	}
-	
+
 }
 
 
@@ -49,7 +49,6 @@ if (!empty($arResult['ITEMS']))
 <? echo $arResult["NAV_STRING"]; ?>
 <div class="catalog-products-list">
 <?
-
 foreach ($arResult['ITEMS'] as $key => $arItem)
 {
 	$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], $strElementEdit);
@@ -91,27 +90,26 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
 		? $arItem['IPROPERTY_VALUES']['ELEMENT_PREVIEW_PICTURE_FILE_TITLE']
 		: $arItem['NAME']
 	);
-	
+
 	$category = '';
-	
+
 	if($arResult['SECTIONS_ITEMS'] && $arItem['IBLOCK_SECTION_ID'] && isset($arResult['SECTIONS_ITEMS'][$arItem['IBLOCK_SECTION_ID']])){
-		
+
 		$category = $arResult['SECTIONS_ITEMS'][$arItem['IBLOCK_SECTION_ID']]['NAME'];
-		
+
 	}
-	
 	?>
 	<div class="product-item">
 
-	    <div class="j-catalog-item catalog-item"  id="<? echo $strMainID; ?>" rel="<?=$arItem['ID']?>" data-value="<?=$arItem['IBLOCK_SECTION_ID'];?>" 
-			
-			data-id="<?=$arItem['ID']?>" 
+	    <div class="j-catalog-item catalog-item"  id="<? echo $strMainID; ?>" rel="<?=$arItem['ID']?>" data-value="<?=$arItem['IBLOCK_SECTION_ID'];?>"
+
+			data-id="<?=$arItem['ID']?>"
 			data-name="<?=str_replace(array("\"","'"), '', $arItem['NAME']);?>"
 			<?if($category):?>
 			data-category="<?=str_replace(array("\"","'"), '', $category);?>"
 			<?endif?>
 			data-price="<?=$arItem['MIN_PRICE']["DISCOUNT_VALUE"]?>"
-		
+
 		>
 		<a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>" class="catalog-item-block" title="<? echo $imgTitle; ?>">
     		<?
@@ -135,7 +133,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
             	<em id="<? echo $arItemIDs['STICKER_ID']; ?>" ><? echo $arItem['LABEL_VALUE']; ?></em>
             	<?
             	}elseif ($arItem['PROPERTIES']['CML2_PRICEGROUP']['VALUE']) {
-			?><em id=""><?=$arItem['PROPERTIES']['CML2_PRICEGROUP']['VALUE']?></em><?php 
+			?><em id=""><?=$arItem['PROPERTIES']['CML2_PRICEGROUP']['VALUE']?></em><?php
 			}
 	            ?>
     		<img src="<? echo $arItem['PREVIEW_PICTURE']['SRC']; ?>" alt="" />
@@ -147,6 +145,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 ?>
         </span>
         <?
+
 	if (isset($arItem['OFFERS']) && !empty($arItem['OFFERS']))
 	{
 		if ('Y' == $arParams['PRODUCT_DISPLAY_MODE'])
@@ -159,26 +158,26 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
 			<input type="hidden" class="bx_col_input" id="<? echo $arItemIDs['QUANTITY']; ?>" name="<? echo $arParams["PRODUCT_QUANTITY_VARIABLE"]; ?>" value="<? echo $arItem['CATALOG_MEASURE_RATIO']; ?>">
 			<?
 			}
-			
+
 			$basketLink = '<a id="'.$strMainID .'" class="to-basket" href="#"><span>В корзину</span></a>';
 		}
-		
+
 		$boolShowOfferProps = ('Y' == $arParams['PRODUCT_DISPLAY_MODE'] && $arItem['OFFERS_PROPS_DISPLAY']);
 		$boolShowProductProps = (isset($arItem['DISPLAY_PROPERTIES']) && !empty($arItem['DISPLAY_PROPERTIES']));
-		
+
 		if ('Y' == $arParams['PRODUCT_DISPLAY_MODE'])
 		{
 			if (!empty($arItem['OFFERS_PROP']) || $arItem['OFFERS_BUY_PROPS'] /*|| true*/)
 			{
-                 ?>                
+                 ?>
                 <div class="choose-taste j-choose-taste <?php if (count($arItem['OFFERS_BUY_PROPS'])<2){echo "no-arrow";}?>">
                     <div data-value="<?=$arItem['OFFERS_BUY_PROPS'][0]['SKU_ID']?>" class="choose-taste-link j-choose-taste-link" id="<?=$strMainID?>_prop" data-id="<?=$arItem['OFFERS_BUY_PROPS'][0]['ID']?>"><span><?=$arItem['OFFERS_BUY_PROPS'][0]['VALUE']?>  <?php /*?>(<?php if ($arItem['OFFERS_BUY_PROPS'][0]['AMOUNT'] >10){echo ">10";}else{echo $arItem['OFFERS_BUY_PROPS'][0]['AMOUNT']*1;}?>)<?*/?></span> <em></em></div>
                     <div class="choose-taste-list-container">
                         <div class="choose-taste-list j-choose-taste-list">
-                        <?php 
+                        <?php
             				foreach ($arItem['OFFERS_BUY_PROPS'] as $code => $property)
             				{
-            				    ?><div class="item" data-value="<?=$property['SKU_ID']?>"><?=$property['VALUE']?><?php /*?> (<?php if ($property['AMOUNT'] >10){echo ">10";}else{echo $property['AMOUNT']*1;}?>)<?*/?></div><?php 
+            				    ?><div class="item" data-value="<?=$property['SKU_ID']?>"><?=$property['VALUE']?><?php /*?> (<?php if ($property['AMOUNT'] >10){echo ">10";}else{echo $property['AMOUNT']*1;}?>)<?*/?></div><?php
             				}
                         ?>
                         </div>
@@ -187,7 +186,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 </div>
                 <?
 			}
-		} 
+		}
 	}?>
         <div class="catalog-item-price"<?php if (empty($arItem['MIN_PRICE'])){echo "style='height:70px;'";}?>>
                   <div id="<? echo $arItemIDs['PRICE']; ?>">
@@ -216,7 +215,13 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 	}else {
                 	    $hideLink = $arParams['HIDE_CHECK_AVAILABILITY'] == 'Y';
                     $basketLink = '';
-                	    ?><span class="is-empty" style="margin-top:20px;">Только в розничных магазинах</span>
+                    ?>
+
+                        <?php if ($arParams['HIDE_CHECK_AVAILABILITY'] == 'N'): ?>
+                            <span class="is-empty" style="margin-top:20px;">нет в наличии</span>
+                        <?php else: ?>
+                        <span class="is-empty" style="margin-top:20px;">Только в розничных магазинах</span>
+                        <?php endif; ?>
                 	    <span class="new-price" style="width:100%;height:40px;"><?php if ($arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE']){echo $arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE'] . ' р.';};?></span>
                 	    <?php
                 	}
@@ -228,7 +233,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
      <?php if (!stristr( $arItem['NAME'],'Подарочный сертификат')){
      if (/* $arParams['HIDE_EMPTY'] == 'Y' && */ $hideLink) {?><span class="quantity" style="line-height: 2px;">&nbsp;</span><?php  } else {
          ?><a class="quantity j-quantity" data-id="1" href="#">Узнать наличие в магазинах</a><?php
-     } 
+     }
      }?>
     <?php if (isset($arItem['OFFERS']) && !empty($arItem['OFFERS']))
     {?>

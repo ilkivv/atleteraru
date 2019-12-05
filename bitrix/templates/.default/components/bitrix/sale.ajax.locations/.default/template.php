@@ -1,6 +1,8 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-
+echo "<pre>";
+print_r($arResult);
+echo "</pre>";
 $disabled = false;
 if ($arParams["AJAX_CALL"] != "Y"
 	&& count($arParams["LOC_DEFAULT"]) > 0
@@ -58,7 +60,7 @@ else
 	<?if($cDisabled):?>
 		</div>
 		<?if(strlen($countryName) > 0):?>
-			
+
 		<?endif;?>
 	<?endif?>
 

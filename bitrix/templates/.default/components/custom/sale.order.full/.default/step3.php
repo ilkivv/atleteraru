@@ -74,13 +74,15 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
 
                     <table class="ordering-table">
                     <?
-                    
                     if ($arResult["DELIVERY"]) {
 
 						$first = true;
 					foreach ($arResult["DELIVERY"] as $delivery_id => $arDelivery)
 					{
+					    if(isset($arDelivery['SID']) && $GLOBALS['CURRENT_CITY']['HIDE_CHECK_AVAILABILITY'] == true) {
+                        }else{
 
+                        echo "</pre>";
                         if (!isset($arCheckDelivery[$arDelivery['ID']]['DISPLAY'])) {
                             if ($delivery_id !== 0 && intval($delivery_id) <= 0):
                                 ?><?
@@ -118,7 +120,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
                                                 "CURRENCY" => $arResult["BASE_LANG_CURRENCY"],
                                             ));
                                             ?>
-                                            <? if ($arParams["SHOW_AJAX_DELIVERY_LINK"] == 'N'):?>
+                                            <? if ($arParams["SHOW_AJAX_DELIVERY_LINK"] == 'N'): ?>
                                                 <script type="text/javascript">deliveryCalcProceed({
                                                         STEP: 1,
                                                         DELIVERY: '<?=CUtil::JSEscape($delivery_id)?>',
@@ -129,7 +131,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
                                                         CURRENCY: '<?=CUtil::JSEscape($arResult["BASE_LANG_CURRENCY"])?>'
                                                     })</script>
                                             <? endif; ?>
-                                            <? if (strlen($arProfile["DESCRIPTION"]) > 0):?>
+                                            <? if (strlen($arProfile["DESCRIPTION"]) > 0): ?>
                                                 <div class="delivery-condition">
                                                 <?= nl2br($arProfile["DESCRIPTION"]) ?></div><? endif; ?>
                                         </td>
@@ -175,6 +177,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
                             <?php endif; ?>
                             <?php
                         }
+                        }
 
                         }?>
                         <?php } else {?>
@@ -206,10 +209,10 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
 	</td>
 	<td valign="top" width="5%" rowspan="3">&nbsp;</td>
 	<td valign="top" width="35%" rowspan="3">
-		
+
 		<?echo GetMessage("STOF_DELIVERY_NOTES")?><br /><br />
 		<?echo GetMessage("STOF_PRIVATE_NOTES")?>
-		
+
 	</td>
 </tr>
 <tr>
@@ -220,6 +223,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
 				<td colspan="2"><?echo GetMessage("STOF_SELECT_DELIVERY")?><br /><br /></td>
 			</tr>
 			<?
+            print_r($GLOBALS['CURRENT_CITY']);
 				foreach ($arResult["DELIVERY"] as $delivery_id => $arDelivery)
 				{
 					if ($delivery_id !== 0 && intval($delivery_id) <= 0):
@@ -229,7 +233,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
 						<b><?=$arDelivery["TITLE"]?></b><?if (strlen($arDelivery["DESCRIPTION"]) > 0):?><br />
 						<?=nl2br($arDelivery["DESCRIPTION"])?><br /><?endif;?>
 						----<table border="0" cellspacing="0" cellpadding="3">
-						
+
 					<?
 						foreach ($arDelivery["PROFILES"] as $profile_id => $arProfile)
 						{
@@ -266,7 +270,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
 					?>
 						</table>
 
-						
+
 					</td>
 				</tr>
 				<?
@@ -300,7 +304,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
 					</tr>
 					<?
 					endif;
-				
+
 				} // endforeach
 			?>
 			<?
@@ -311,7 +315,7 @@ if(count($arBasketItems) > 0 && count($arResult['DELIVERY']) > 0){
 </tr>
 <tr>
 	<td valign="top" width="60%" align="right">
-	
+
 	</td>
 </tr>
 </table>

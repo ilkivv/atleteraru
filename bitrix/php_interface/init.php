@@ -197,7 +197,7 @@ function getDiscountByPercent($percent)
     if (! $arResult[ 'ID' ]) {
         $arFields = array (
             'SITE_ID' => 's1',
-            'ACTIVE' => "Y",
+            'ACTIVE' => "N",
             'NAME' => 'СКИДКА ' . $percent . '%',
             'SORT' => 100,
             'VALUE_TYPE' => 'P',
@@ -206,10 +206,6 @@ function getDiscountByPercent($percent)
         );
         $arResult[ 'ID' ] = CCatalogDiscount::Add ($arFields);
     }
-    CCatalogDiscount::Update ($arResult[ 'ID' ], array (
-        "ACTIVE" => "Y",
-        'SITE_ID' => 's1'
-    ));
     return $arResult[ 'ID' ];
 }
 
