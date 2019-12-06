@@ -38,15 +38,12 @@
                 $('.j-basket-buttons-childs[rel="' + $(this).attr('rel') + '"]').hide();
             }
             $('blockquote[rel="' + $(this).attr('rel') + '"]').css('display','none');
-            if ($(this).val() == 5){
-                //console.log("cber");
-                $('blockquote[rel="' + $(this).attr('rel') + '"]').css('display','block');
+            console.log($(this).attr('rel'));
+            console.log($(this).val());
+            $('blockquote[data-payment="' + $(this).val() + '"]').css('display','block');
+        });
+        $('.form-out').click(function(value){
 
-            }
-            else{
-                //console.log("out");
-                $('blockquote[rel="' + $(this).attr('rel') + '"]').css('display','none');
-            }
         });
     });
 </script>
@@ -106,19 +103,37 @@
                     <?php else: ?>
                         <span><?=$arResult["INFO"]["PAY_SYSTEM"][$order["ORDER"]["PAY_SYSTEM_ID"]]["NAME"]?></span>
                     <?php endif; ?>
+
                     <?php if ($order["ORDER"]["PAY_SYSTEM_ID"] == 5): ?>
-                    <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" style="font-size: 12px;">
-                        <?php else: ?>
-                        <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" style="font-size: 12px;display: none">
-                            <?php endif; ?>
-                            Перевод денег на карту Сбербанка</a>: Ирина Васильевна М. <strong>4276 6400 1343 7233</strong><a href="https://online.sberbank.ru" class="basket-pay-button" name="paymentType">Оплатить</a>
-                        </blockquote>
-                        <?php if ($order["ORDER"]["PAY_SYSTEM_ID"] == 1): ?>
-                        <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" style="font-size: 12px;">
-                            <?php else: ?>
-                            <blockquote rel="<?= $order['ORDER']['ID'] ?>" style="font-size: 12px;display: none">
-                        <?php endif; ?>
+                        <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="5" style="font-size: 12px;">
+                        <b>Перевод денег на карту Сбербанка</b>: Ирина Васильевна М. <strong>4276 6400 1343 7233</strong><a href="https://online.sberbank.ru" target="_blank" class="basket-pay-button" name="paymentType">Оплатить</a></blockquote>
+                    <?php else: ?>
+                        <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="5" style="font-size: 12px;display: none;">
+                        <b>Перевод денег на карту Сбербанка</b>: Ирина Васильевна М. <strong>4276 6400 1343 7233</strong><a href="https://online.sberbank.ru" target="_blank" class="basket-pay-button" name="paymentType">Оплатить</a></blockquote>
+                    <?php endif; ?>
+                        <?php if ($order["ORDER"]["PAY_SYSTEM_ID"] == 1 || $order["ORDER"]["PAY_SYSTEM_ID"] == 10): ?>
+                        <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="1" style="font-size: 12px;">
                         Оплата при получении заказа.</blockquote>
+                    <?php else: ?>
+                            <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="1" style="font-size: 12px;display: none;">
+                                Оплата при получении заказа.</blockquote>
+                    <?php endif; ?>
+
+                    <?php if ($order["ORDER"]["PAY_SYSTEM_ID"] == 9): ?>
+                        <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="9" style="font-size: 12px;">
+                        <input class="basket-pay-button form-out" type="submit" value="Оплатить"> Оплатить онлайн</blockquote>
+                            <?php else: ?>
+                            <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="9" style="font-size: 12px;display: none;">
+                                <input class="basket-pay-button form-out" rel="<?= $order['ORDER']['ID'] ?>" type="submit" value="Оплатить"> Оплатить онлайн</blockquote>
+                            <?php endif; ?>
+
+                            <?php if ($order["ORDER"]["PAY_SYSTEM_ID"] == 4): ?>
+                        <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="4" style="font-size: 12px;">
+                        <input class="basket-pay-button" type="submit" rel="<?= $order['ORDER']['ID'] ?>" value="Оплатить"> Оплатить онлайн</blockquote>
+                    <?php else: ?>
+                            <blockquote class="blockquote-order" rel="<?= $order['ORDER']['ID'] ?>" data-payment="4" style="font-size: 12px;display: none;">
+                                <input class="basket-pay-button" type="submit" value="Оплатить"> Оплатить онлайн</blockquote>
+                    <?php endif; ?>
                 </td>
                 <td>
                     <strong>Сумма заказа с учетом доставки</strong>
@@ -188,7 +203,7 @@
                         <input type="hidden" name="need-phone" value="false">
                         <input type="hidden" name="need-address" value="false">
                         <?php if ($order["ORDER"]['PAY_SYSTEM_ID'] == 9): ?>
-                            <input class="j-paymentType-<?= $order["ORDER"]['ID']; ?>" type="hidden" name="paymentType" value="AC">
+                            <input class="j-paymentType-<?= $order["ORDER"]['ID']; ?>" dara- type="hidden" name="paymentType" value="AC">
                         <?php else: ?>
                             <input class="j-paymentType-<?= $order["ORDER"]['ID']; ?>" type="hidden" name="paymentType" value="PC">
                         <?php endif; ?>

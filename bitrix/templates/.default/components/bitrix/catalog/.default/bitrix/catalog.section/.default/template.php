@@ -226,7 +226,13 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
                 	}else {
                 	   $hideLink = $arParams['HIDE_CHECK_AVAILABILITY'] == 'Y';
                     $basketLink = '';
-                	    ?><span class="is-empty" style="margin-top:20px;margin-bottom:10px;">Только в розничных магазинах</span>
+                	    ?>
+                        <?php if($GLOBALS['CURRENT_CITY']['HIDE_CHECK_AVAILABILITY'] == true): ?>
+                            <span class="is-empty" style="margin-top:20px;margin-bottom:10px;">Товара <br />нет в наличии</span>
+                        <?php else: ?>
+                            <span class="is-empty" style="margin-top:20px;margin-bottom:10px;">Только в розничных магазинах</span>
+                        <?php endif; ?>
+
                 	    <span class="new-price" style="width:100%;height:40px;">
                             <?php /*if ($arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE']){echo $arItem['DISPLAY_PROPERTIES']['MAX_PRICE']['VALUE'] . ' р.';};*/?>
                         </span>
